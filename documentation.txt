@@ -1,0 +1,157 @@
+***************** Comandos para Crear DB *****************
+CREATE database 'nombre de la base de datos';
+
+	======= Para crear DB si no existe =======
+CREATE database if not exists 'nombre BD'
+
+***************** Usar nuestra DB *****************
+USE 'nombre de la BD';
+
+***************** VER TABLAS QUE CONTIENE DB *****************
+SHOW TABLES;
+
+***************** ELIMINAR DB *****************
+DROP DATABASE 'nombre de BD a borrar';
+
+***************** CREAR TABLAS EN LA BD *****************
+USE 'nombre de la BD';
+
+	CREATE TABLE 'nombre de la tabla'(
+		 campo1 tipo(longitud),
+		 campo2 tipo(longitud),
+		 campo_n tipo(longitud)
+	);
+
+***************** ELIMINAR TABLAS EN LA BD *****************
+DROP TABLE 'nombre de la tabla';
+
+***************** TIPOS DE DATOS DE LAS COLUMNAS *****************
+====TIPOS DE DATOS NUMERICOS
+		1.-NUMERO ENTEROS
+		2.-NUEMEROS FLOTANTE
+	BIT-> [(Longitud)]entre 1 y 64, 1byte
+
+	INT-> [(Longitud)][UNSIGNED][ZEROFILL]. Tipo Entero(4 bytes). RANGO entre -2,147,483,648 y 2,147,483,647 con signo. LOnGITUD entre 0 y 4,294,967,295 sin signo
+
+	NUMERIC->[(Longitud,decimales)][UNSIGNED][ZEROFILL]. Otro sinonimo de decimal
+
+	TINYINT-> [(Longitud)][UNSIGNED][ZEROFILL], ENTERO(1 byte) longitud de-128 y 127 con signo.LONGITID de 0 a 255 sin signo
+	INTEGER->[(Longitud)][UNSIGNED][ZEROFILL]. Tipo Entero(4 bytes). RANGO entre -2,147,483,648 y 2,147,483,647 con signo. LOnGITUD entre 0 y 4,294,967,295 sin signo
+
+	FIXED->[(Longitud,decimales)][UNSIGNED][ZEROFILL].Sinonimo de decimal.Numero con coma flotante. Longitud de -3.402823466 X 10 a la 38 hasta -1.175494351 X 10 a la -38 ó De 1.175494351 X 10 a la-38 hasta 3.402823466 X 10 a la 38
+
+	BOOL,BOOLEAN->EQUIVALENTE ATINYINT(1), RANGO ENTRE0 Y 1.SE USA PARA FALSO(0) Y VERDADERO(1). 1 byte
+
+	BIGINT->[(Longitud)][UNSIGNED][ZEROFILL]. Tipo Entero(8 bytes). RANGO entre -9,223,372,036,854,775,807 y 9,223,372,036,854,775,806 con signo. LONGITUD entre 0 y 18,446,744,073,709,551,615 sin signo
+
+	FLOAT
+
+	SMALLINT-> [(Longitud)][UNSIGNED][ZEROFILL] TIPO ENTERO(2 byte). RANGO ENTRE -32,768 y 32,767 con signo, longitud entre0 y65,535 sin signo
+
+	DECIMAL->[(Longitud,decimales)][UNSIGNED][ZEROFILL]. Numero con coma flotante.Longitud de hasta 65 digitos en la parte entera yhasta 30 digitos en la parte decimal(por defecto 0)
+
+	DOUBLE-> [(Longitud,decimales)][UNSIGNED][ZEROFILL]. Numero con coma flotante(doble precisión). Longitud de -1.7976931348623157 X 10 a la 308 hasta -2.2250738585072014 X 10 a la -308 ó De 2.2250738585072014 X 10 a la -308 hasta 1.7976931348623157 X 10a la 308
+
+	MEDIUMINT-> [(Longitud)][UNSIGNED][ZEROFILL], TIPO ENTERO(3 bytes), RANGO entre -8388608 y 8388607 con signo. Longitud entre 0 y2,294,967,295 sin signo
+
+	DEC-> SINONIMO DE DECIMAL
+
+	DOUBLE PRECISION-> SINONIMO DE DOUBLE
+
+====TIPOS DE DATOS FECHA Y HORA
+	DATE->Fecha con formato "YYYY-MM-DD". 3 bytes
+
+	DATETIME->[(precisión)] Fecha y Horacon formato "YYYY-MM-DD HH:MM:SS.SSSSSS". El parametro precisión en la parte decimal de los segundos.5 bytes
+
+	TIMESTAMP->[(precisión)].El parametro precisión representala cantidad de dígitos que se usarán para representar una fecha y hora desde 1970 hasta 2037. 4 bytes
+
+	TIME->[(precisión)]. Hora, con formato "HH:MM:SS[precisión valores de SS]". 3 bytes.
+
+	YEAR->Representa el año con formato de cuatro digitos "YYYY" o dos digitos "YY". 1 byte
+
+====TIPOS DE DATOS CADENA DE CARACTERES
+	CHAR->[(longitud)]
+		-Admite caracteres alfanumericos.
+		-Longitud de 1 - 255 caracteres (por defecto 1)
+		-Si se asigna una cadena de longitud menor,está se completará con espacios.
+	VARCHAR->[(longitud)]
+		-Similar a CHAR salvo que es necesario especificar la longitud y no seautorrellena con espacios.
+
+	TINYTEXT->
+		-Cadenas de longitud variable
+		-Hasta 255 carácteres
+
+	TEXT->
+		-Cadenas de longitud variable
+		-Hasta 65,535 carácteres (64k)
+
+	MEDIUMTEXT->
+		-Cadenas de longitud variable
+		-Hasta 16,777,215 carácteres (16Mb)
+
+	LONGTEXT->
+		-Cadenas de longitud variable
+		-Hasta 4,294,967,295 carácteres (4Gb)
+
+====TIPOS DE DATOS BINARIOS
+	BLOB->
+		-Objeto Binario que puede almacenar culquiertipo de información. Admite hasta 65,535 caracteres.64Kb
+
+	TINYBLOB->
+		-Es similar al BLOB
+		-Hasta 255 bytes.
+
+	MEDIUMBLOB->
+		-Es similar al BLOB
+		-Hasta 16Mb.
+
+	LONGBLOB->
+		-Es similar al BLOB
+		-Hasta 4Gb
+
+***************** MOSTRAR BD CON VARIANTES CREACION DE BD*****************
+show databases like 'cli%';
+
+CREATE database IF NOT EXISTS clientes CHARACTER SET=latin2;(No puede crear la BD por que ya existe)
+SHOW WARNINGS;(Muestra Level, Code, Y el mensaje)
+SHOW CREATE DATABASE clientes;(Para mostrar cual fue la sintaxis que se uso para la creación de la BD)
+
+***************** MOSTRAR TABLA CON VARIANTES, CREACION DE TABLAS*****************
+
+CREATE[TEMPORARY(permite crear una tabla temporal)]TABLE[IF NOT EXISTS]nombre_tabla
+(
+	**EN ESTA SECCION ES DONDE SE DEFINEN TODAS LAS COLUMNAS E INDICES QUE COMPONEN LAS TABLAS**
+
+	nombre_columna definicion_Columna(tipo_dato,[NOT NULL | NULL],[DEFAULT{literal | (expr)}], [AUTO_INCREMENT], [UNIQUE[KEY]], [[PRIMARY]KEY], [COMMENT'string'])
+	| {INDEX|KEY}[nombre_indice]
+	[tipo_indice](columna_llave,...)[opciones_indice]...
+)
+[DEFAULT] CHARACTER SET[=]charset_name
+COMMENT[=]'string'
+
+EJEMPLO:
+
+CREATE TABLE if not EXISTS cliente(
+
+	num_cliente INTEGER NOT NULL AUTO_INCREMENT COMMENT 'Numero de Identificacion del cliente',
+    nombre VARCHAR(30) NOT NULL COMMENT 'Nombre del cliente',
+    direccion VARCHAR(30) NOT NULL COMMENT 'direccion para entrega de mercancia al cliente',
+   	ciudad VARCHAR(20) NOT NULL COMMENT 'Nombre de la ciudad de ubicacion del cliente',
+    telefono VARCHAR(15)NOT NULL COMMENT 'El numero telefonico del contacto',
+    PRIMARY KEY (num_cliente) COMMENT 'Es el id de cada registro'
+
+);
+
+show columns from cliente; (Con esta instruccion podemos ver lo que creamos en la parte de arriba)
+show full columns from cliente; (Con esta instruccion podemos ver la informacion completa que creamos en la parte de arriba)
+
+
+CREATE TABLE IF NOT EXISTS factura
+(
+    num_factura INTEGER NOT NULL COMMENT 'numero unico de documento',
+    num_cliente INTEGER NOT NULL COMMENT 'numero de identifiacion del cliente',
+    fecha_factura DATE NOT NULL DEFAULT (CURRENT_DATE) COMMENT 'fecha del documento',
+    valor_total MEDIUMINT UNSIGNED NOT NULL COMMENT 'valor total de la transaccion',
+    PRIMARY KEY (num_factura) COMMENT 'el numero del documento debe ser unico',
+    KEY (num_cliente) COMMENT 'es un indice de busqueda',
+);
