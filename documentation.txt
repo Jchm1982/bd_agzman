@@ -1,3 +1,6 @@
+CURSO BD CON ALEJANDRO GUZMAN
+
+
 ***************** Comandos para Crear DB *****************
 CREATE database 'nombre de la base de datos';
 
