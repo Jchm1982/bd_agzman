@@ -187,3 +187,47 @@ Ejemplo:
 
 USE clientes;
 SHOW CREATE DATABASE clientes;
+
+ ******************************* COMO INSERTAR DATOS EN LA BD ****************************
+
+INSERT INTO nombre_tabla(donde vas a insertar datos)
+		(columna_1, columna_2,...columna_n)
+			VALUES (valor_1,valor_2,...valor_n)
+	[WHERE condición(opcional)]
+
+EJEMPLO:
+1)
+INSERT INTO cliente (num_cliente,nombre,direccion,ciudad,telefono)
+	VALUES(10,"Alejandro","Av. americas 78-90","bogota","+(57)304-6239358");
+
+2)
+INSERT INTO factura (num_factura,num_cliente,valor_total)
+	VALUES(2543,10,12500);
+
+3)
+INSERT INTO productos (cod_producto,descripcion,precio_venta)
+	VALUES(774878344,"tv 4k 65 pulgadas",10000);
+4)
+INSERT INTO det_factura (num_factura,cod_producto,cant_vendida,valor_unitario)
+	VALUES(2543,774878344,1,10000);
+
+ ******************************* SENTENCIA SELECT EN MySQL ****************************
+
+SELECT [* | ALL | col1,col2,... coln]
+	[INTO 'archivo_salida']
+	 	FROM nombre_tabla[,nombre_tabla,...]
+	[WHERE expresion_condicion]
+	[GROUP BY columnas]
+	[ORDER BY columnas[ ASC | DESC ]]
+	[LIMIT #]
+
+	FUNCIONES DE AGREGACION:
+	-count:Devuelve el numero total de filas seleccionadas por la consulta.
+	-min:Devuelve el valor minimo del campoque especifiquemos.
+	-max:Devuelve el valor maximo del campoque especifiquemos.
+	-sum:Suma los valores de los campos que especifiquemos(solo numeros)
+	-avg:Devuelve el valor promedio de los campos que esecifiquemos(solo numeros)
+		EJEMPLOS:
+		-SELECT sum(valor_total)
+		-SELECT count(*)
+		-SELECT min(precio_venta)
