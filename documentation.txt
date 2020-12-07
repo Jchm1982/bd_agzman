@@ -148,13 +148,42 @@ CREATE TABLE if not EXISTS cliente(
 show columns from cliente; (Con esta instruccion podemos ver lo que creamos en la parte de arriba)
 show full columns from cliente; (Con esta instruccion podemos ver la informacion completa que creamos en la parte de arriba)
 
-
+//PARA VERISONES ANTERIORES A MySQL 8.0
 CREATE TABLE IF NOT EXISTS factura
 (
     num_factura INTEGER NOT NULL COMMENT 'numero unico de documento',
     num_cliente INTEGER NOT NULL COMMENT 'numero de identifiacion del cliente',
-    fecha_factura DATE NOT NULL DEFAULT (CURRENT_DATE) COMMENT 'fecha del documento',
+    fecha_factura DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'fecha del documento',
     valor_total MEDIUMINT UNSIGNED NOT NULL COMMENT 'valor total de la transaccion',
     PRIMARY KEY (num_factura) COMMENT 'el numero del documento debe ser unico',
-    KEY (num_cliente) COMMENT 'es un indice de busqueda',
+    KEY (num_cliente) COMMENT 'es un indice de busqueda'
 );
+
+CREATE TABLE IF NOT EXISTS det_factura
+(
+	num_factura INTEGER NOT NULL COMMENT 'numero unico de documento',
+    cod_producto SMALLINT UNSIGNED NOT NULL COMMENT 'numero de identificacion del producto',
+    cant_vendida TINYINT UNSIGNED NOT NULL COMMENT 'cantidad de unidades compradas de este producto',
+    valor_unitario SMALLINT UNSIGNED NOT NULL COMMENT 'valor unitariod e compra de este producto',
+    PRIMARY KEY (num_factura,cod_producto) COMMENT 'solo un producto igual en cada documento',
+    KEY (cod_producto) COMMENT 'indice de busqueda por codigo deproducto'
+);
+
+CREATE TABLE IF NOT EXISTS productos
+(
+    cod_producto SMALLINT UNSIGNED NOT NULL COMMENT 'numero de identificacion del proucto',
+    descripcion VARCHAR(60) NOT NULL COMMENT 'descripcion completa del producto',
+    precio_venta SMALLINT UNSIGNED NOT NULL COMMENT 'valor unitario de este productio hoy',
+    PRIMARY KEY (cod_producto) COMMENT 'cada producto tiene un codigo unico',
+    KEY (descripcion) COMMENT 'indice de busqueda por descripcion del producto'
+    );
+
+ **************** COMO VISUALIZAR EL ESQUEMA DE LA BD *************
+
+ SHOW CREATE { DATABASE | SCHEMA }
+ 	[IF NOT EXISTS] nombre_basedatos
+
+Ejemplo:
+
+USE clientes;
+SHOW CREATE DATABASE clientes;
