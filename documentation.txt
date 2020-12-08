@@ -231,3 +231,43 @@ SELECT [* | ALL | col1,col2,... coln]
 		-SELECT sum(valor_total)
 		-SELECT count(*)
 		-SELECT min(precio_venta)
+
+******************************* ACTUALIZAR DATOS DE UNA TABLA ****************************
+
+	UPDATE [LOW_PRIORITY][IGNORE] tabla
+		SET columna=nuevo_valor
+	  [WHERE condicion_seleccion]
+		[LIMIT row_count]
+
+EJEMPLO:
+
+1)
+UPDATE cliente SET nombre = "Alejandro Guzman" WHERE num_cliente = 10
+
+2)
+UPDATE factura,det_factura set det_factura.valor_unitario = det_factura.valor_unitario-500,factura.valor_total=factura.valor_total-500 WHERE det_factura.num_factura = factura.num_factura AND factura.num_factura = 2545 AND det_factura.num_factura = 2545;
+
+	******************************* ELIMINAR REGISTROS DE UNA TABLA ****************************
+
+DELETE [LOW_PRIORITY][QUICK][OGNORE]
+	FROM tabla
+	[WHERE condicion_seleccion]
+	[ORDER BY columna]
+	[LIMIT #]
+
+EJEMPLO
+1)
+DELETE FROM cliente WHERE num_cliente = 20;
+
+  ******************************* CONSULTA DE DATOS NO EXACTO DE UNA TABLA ****************************
+
+SELECT cod_producto,descripcion,precio_venta FROM productos
+WHERE cod_producto = 775627384;
+
+SELECT cod_producto,descripcion,precio_venta FROM productos
+WHERE cod_producto LIKE "%Videojuegos%";
+
+SELECT cod_producto,descripcion,precio_venta FROM productos
+WHERE cod_producto NOT LIKE "%Videojuegos%";
+
+SELECT * FROM productos WHERE cod_producto NOT LIKE "M%";
