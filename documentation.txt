@@ -271,3 +271,105 @@ SELECT cod_producto,descripcion,precio_venta FROM productos
 WHERE cod_producto NOT LIKE "%Videojuegos%";
 
 SELECT * FROM productos WHERE cod_producto NOT LIKE "M%";
+
+  ******************************* FUNCIONES DE COMPARACION Y OPERADORES ****************************
+
+BETWEEN ... AND
+	Sintaxis -> expresión BETWEEN minimo AND máximo
+	Ejemplo -> precio_venta BETWEEN 3000 AND 5000
+
+función COALESCE()
+	Sintaxis -> COALESCE(valor1,valor2,valor3,...) = Devuelve el primer valor NOT NULL de una lista o NULL si no hay valores
+	Ejemplo -> SELECT nombre,COALESCE(num_factura) FROM clientes, factura WHERE factura.num_cliente =clientes.num_cliente
+
+Operador <->(Seguro o igual a null)
+	Sintaxis ->
+	Ejemplo ->SELECT NULL <=> 1,NULL <=> NULL, 3 <=> NULL
+
+Operador = (Igual a)
+	Sintaxis -> Operador de Igual
+	Ejemplo ->1=1,1=2,null=null,null=3,3=null;
+
+Operador >= (Mayor o igual a):Comprueba si una expresion es igual o mayor que otra expresion.
+	Sintaxis -> expresión >= valor
+	Ejemplo ->precio_venta >=5000
+
+Función GREATES():Devuelve el mayor de los argumentos dados, y devolver null si cualquiera de sus argumentos es null
+	Sintaxis -> GREATES(valor1,valor2,...)
+	Ejemplo -> SELECT GREATES(15,10,25);
+
+Función IN():Encuentra una coincidencia de los argumentos dados y devuelve 1 si la expresion es igual a cualquiera de los valores de la lista IN, de lo contrario devolverá 0.
+	Sintaxis -> expresion IN (value,...)
+	Ejemplo ->SELECT num_cliente, nombre FROM cliente WHERE num_cliente IN (10,20)
+
+Función INTERVAL():Devuelve el indice del argumento que es menor que el primer argumento. Devuelve 0 si el primer numero es menor que el segundo numero y 1 si el primer numero es menor que el tercer numero y asi de forma sucesiva. O devolvera -1 si el primer numero es NULL.Todos loas argumentos en está sentencia se tratan como numeros enteros.
+	Sintaxis -> INTERVAL(N,N1,N2,N3,...)
+	Ejemplo ->SELECT interval (85,1,75,17,30,56,175): Aquie devuelve el numero 5 que es la posicion
+
+Operador IS NOT NULL:Verifica si un valor no es nulo
+	Sintaxis -> SELECT 5 IS NOT NULL, 0 IS NOT NULL,NULL IS NOT NULL;
+	Ejemplo -> SELECT * FROM productos WHERE descripcion IS NOT NULL;(traiga todos los productos cuya descripcion no sea nula)
+
+Operador IS NOT:Este operador prueba un valor contra un valor boleano,donde el valor boleano puede ser TRUE, FALSE o UNKNOWN.
+	Sintaxis ->select 1 IS NOT UNKNOWN, 0 IS NOT UNKNOWN,null IS NOT UNKNOWN;
+	Ejemplo ->
+
+Operador IS NULL:Prueba un valor contra un valor boleano,donde el valor boleano puede ser TRUE, FALSE o UNKNOWN.
+	Sintaxis ->SELECT 1 IS TRUE, 0 IS FALSE, NULL IS UNKNOWN;
+	Ejemplo ->
+
+Operador IS:Prueba un valor contra un valor boleano,donde el valor boleano puede ser TRUE, FALSE o UNKNOWN.
+	Sintaxis ->SELECT 1 IS TRUE,0 IS FALSE,NULL IS UNKNOWN;
+	Ejemplo ->
+
+Función ISNULL():Devolvera un valor 1 cuando la expresion sea nula, de lo contrario siempre devolvera un valor 0.
+	Sintaxis -> ISNULL(1+0), en este ejemplo devuelve 0 por que no es nulo.
+	Ejemplo ->
+
+Función LEAST():Devuelve el argumento mas pequeño de 2 o más argumentos.Si el argumento es NULL el resultado sera null. Si son valores enteros se compararan con valores enteros.Si se utiiza un cotexto de tipo realy todos los argumentos son de tipo real, se compararán de está forma.Si hay una combinacion de numeros y cadenas, se compararán como numeros.
+	Sintaxis ->
+	Ejemplo ->SELECT LEAST(15,10,25), aqui arrojara el numero 10 como resultado
+			  SELECT LEAST("z","m","s"), aqui arrojara la letra m.
+
+  ******************************* OPERADORES LOGICOS ****************************
+En MySQL todos los operadores logico se valuan a TRUE, FALSE o NULL(UNKNOWN). Y se implementa de la siguiente forma:
+	1->TRUE
+	0->FALSE
+	NULL
+
+NOT ó !:
+Ejemplos:
+	SELECT NOT 10; 	-> 0
+	SELECT NOT 0; 	-> 1
+	SELECT NOT NULL; -> NULL
+	SELECT ! (1+1); -> 0
+	SELECT ! 1+1; 	-> 1
+
+AND ó &&:Logica.Se evalua a 1 si todos los operadores sondistintos a cero y no NULL, a 0 si uno o más operandos son 0,de otro modo retorna null.
+Ejemplos:
+	SELECT 1 && 1; 	-> 1
+	SELECT 1 && 0; 	-> 0
+	SELECT 1 && NULL; -> NULL
+	SELECT 0 && NULL; -> 0
+	SELECT NULL && 0; 	-> 0
+
+OR ó||:LOGICO. Cuando ambos operandos son no NULL, le resultado es 1 si algun operando es diferente a cero,y 0 de otro modo.Con un operando NULL el resultado es 1 si el otro operando no es cero,y NULL de otro modo.Si ambos operandos son NULL,el resultado es NULL.
+Ejemplos:
+	SELECT 1 || 1; 	-> 1
+	SELECT 1 || 0; 	-> 1
+	SELECT 0 || 0; 	-> 0
+	SELECT 1 || NULL; -> 1
+	SELECT 0 || NULL; -> NULL
+	SELECT NULL || 0; 	-> 0
+
+XOR:Logica.Retorna NULL si algún operando es NULL.Para operandos no NULL,evaluaa 1 si un numero par de operadores es distinto a cero,sino retorna 0.
+Ejemplos:
+	SELECT 1 XOR 1; 	-> 0
+	SELECT 1 XOR 0; 	-> 1
+	SELECT 1 XOR NULL; 	-> NULL
+	SELECT 1 XOR 1 XOR 1; 	-> 1
+	******************************* FUNCIONES DE CONTROL DE FLUJO ****************************
+CASE:
+IF:
+IFNULL:
+NULLIF:
