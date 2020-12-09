@@ -369,7 +369,52 @@ Ejemplos:
 	SELECT 1 XOR NULL; 	-> NULL
 	SELECT 1 XOR 1 XOR 1; 	-> 1
 	******************************* FUNCIONES DE CONTROL DE FLUJO ****************************
-CASE:
-IF:
+
+CASE:Se basa en la evaluación de una expresion y cada valor posible se puede especificar en una clausula WHEN de forma independiente.Else puede eliminarse.
+	CASE expresion
+		WHEN valor THEN resultado
+		. . .
+		ELSE resultado
+		END
+
+	EJEMPLO:
+	SELECT SUBSTR(descripcion,1,20),
+	case count(*)
+	when 1 then 1
+	else "mas de 1"
+	end as "cantidad"
+	FROM productos
+	GROUP BY 1;
+
+IF:Permite evaluar una expresion y regresar un valor determinado cuandola expresion es verdadera.
+	IF(expresion,
+		resultado_true,
+		resultado_false
+	)
+	EJEMPLO:
+	SELECT descripcion, precio_venta,IF(precio_venta >= 10000,"Costoso","Economico") as Precio_Es FROM productos GROUP BY 1,2;
 IFNULL:
-NULLIF:
+	IFNULL(expresion,
+		resultado
+	)
+	EJEMPLO:
+	SELECT num_cliente,nombre,ifnull(pais,"pais no definido") FROM cliente;
+
+NULLIF:Compara 2 expresiones y retorna null si ambas expresiones son exactamente iguales de lo contrario regresara la expresion original.
+	NULLIF(
+	expresion,
+	expresion
+	)
+	EJEMPLO:
+		SELECT descripcion,NULLIF(precio_venta,costo) as "sin utilidad" FROM productos;
+
+******************************* FUNCIONES CON CADENAS ****************************
+ASC(cadena):
+BIN(numero):
+BIN_LENGTH(cadena):
+CHAR(numero,...):
+CHAR_LENGTH(cadena):
+CHARACTER_LENGTH(cadena):
+COMPRESS(cadena):
+CONCAT(cadena1, cadena2,...):
+CONCAT_WS(separador, cadena1,cadena2 ,...):
