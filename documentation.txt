@@ -409,12 +409,90 @@ NULLIF:Compara 2 expresiones y retorna null si ambas expresiones son exactamente
 		SELECT descripcion,NULLIF(precio_venta,costo) as "sin utilidad" FROM productos;
 
 ******************************* FUNCIONES CON CADENAS ****************************
-ASC(cadena):
-BIN(numero):
-BIN_LENGTH(cadena):
-CHAR(numero,...):
-CHAR_LENGTH(cadena):
+ASC(cadena):Retorna el valor numerico del caracter mas a las izquierda de la cadena de caracteres cadena. Retorna 0 si cadena es la cadena vacia. Retorna NULL si cadena es NULL. ASCII() funciona para caracteres con valores numericos de 0 a 255.
+	EJEMPLO:
+	select ASCII(5);
+	select ASCII("A");
+	select ASCII('a');
+
+BIN(numero):Retorna una representacion de cadena de caracteres del valor binario de numero,donde numero es un numero muy largo(BIGINT).
+			Retorna NULL si numero es NULL. Convierte a binarios
+	EJEMPLO:
+	select BIN(1);
+	select BIN(3);
+	select BIN(4);
+
+BIT_LENGTH(cadena):Retorna la longitud de la cadena de caracteres cadena en bits.(Cuantos bits ocupa
+	EJEMPLO:
+	select BIT_LENGTH('alejandro');
+	select BIT_LENGTH('Texto un poco mas largo');
+
+CHAR(numero,...):Interpreta los argumentos numero como enteros y retorna la cadena de caracteres que consiste en los caracteres dados por los codigos de tales enteros.Los valores NULL no se tienen en cuenta.
+	EJEMPLO:
+	select CHAR(77,121,83,81,76);(Equivale a la palabra MySQL en ASCII)
+
+CHAR_LENGTH(cadena):Retorna la longitud de la cadena de caracteres cadena, medida en caracteres. Un caracter demultiples bytes cuenta como un solo caracter. Esto significa que para una cadena de caracteres que contiene cinco caracteres de dos bytes,LENGTH() retorna 10, mientras CHAR_LENGTH() retorna 5.
+	EJEMPLO:
+	select CHAR_LENGTH("ALEJANDRO");(Devuelve el numero 9, por el conteo de caracteres)
+
 CHARACTER_LENGTH(cadena):
-COMPRESS(cadena):
-CONCAT(cadena1, cadena2,...):
-CONCAT_WS(separador, cadena1,cadena2 ,...):
+
+COMPRESS(cadena):Comprime una cadena de caracteres.Esta funcion necesita que MySQL se compile con una biblioteca de comprension como zlib. De otro modo, el valor retornado siempre es null. la cadena comprimida puede descomprimirse con UNCOMPRESS().
+
+Los contenidos comprimidos se almacenan de al siguiente forma:
+Cadenas vacias se almacenan como cadenas vacias.
+Cadenas no vacias se almacenan como lomgitud de cuatro bytes de la cadena descomprimida(los bytes más bajos primero),seguido de lacadena comprimida. Si la cadena acaba con un espacio, se añade un caracter '.' para evitar problemas con eliminacion de espacios finales al almacenar en una columna CHAR o VARCHAR.(El uso de CHAR o VARCHAR para almacenar cadenas comprimidas no se recomienda. Es mejor usar una columna BLOB)
+	EJEMPLO:
+		insert into productos values(778123894,compress("control remoto"),300,250);
+
+CONCAT(cadena1, cadena2,...):Retorna la cadena resultado de concatenar los argumentos
+	EJEMPLO:
+			select concat(cod_producto," es ",descripcion) as listado FROM productos;
+
+CONCAT_WS(separador, cadena1,cadena2 ,...):Significa CONCAT WITH Separator(CONCAT con separador) y es una forma especial de CONCAT(). EL primer argumento es el separador para el resto de argumentos.El separador se añade entre las cadenas a concatenar.El separador puede ser una cadena como el resto de los argumentos. Si el separador es NULL, el resultado es NULL.La funcion evita valores NULL tras el argumento separador.
+	EJEMPLO:
+			select concat_ws(" | ",cod_producto,descripcion,costo,precio_venta) as datos FROM productos;
+
+CONV(numero,de_base_a_base):
+	EJEMPLO:
+
+
+ELT(numero,cadena1,cadena2,...):
+EXPORT_SET(bits,on,off,separador,#bits):
+FIELD(cadena,cadena1,cadena2,...):
+FIND_IN_SET(cadena,lista_cadena):
+HEX(numero_o_cadena):
+FIND_IN_SET(cadena,lista_cadena):
+INSERT(cadena,pos,longitud,nuevacadena):
+INSTR(cadena,subcadena):
+LCASE(cadena):
+LEFT(cadena,longitud):
+LENGTH(cadena):
+LOAD_FILE(archivo):
+LOCATE(subcadena,cadena,[posicion]):
+LOWER(cadena):
+LPAD(cadena,longitud,cadenapad):
+LTRIM(cadena):
+MAKE_SET(bits,cadena1,cadena2,...):
+MID(cadena,posicion,longutud):
+OCT(numero):
+OCTET_LENGTH(cadena):
+ORD(cadena):
+POSITION(subcadena IN cadena):
+QUOTE(cadena):
+REPEAT(cadena,contador):
+REPLACE(cadena,de_cadena,a_ cadena):
+REVERSE(cadena):
+RIGHT(cadena,longitud):
+RPAD(cadena,longitud,cadenapad):
+RTRIM(cadena):
+SOUNDEX(cadena):
+SPACE(numero):
+SUBSTRING(cadena,posicion[,longitud]):
+SUBSTRING_INDEX(cadena,delimitador,cont):
+TRIM({[BOTH| LEADING| TRAILING]} FROM):
+UCASE(cadena):
+UNCOMPRESS(cadena_comprimida):
+UNCOMPRESSED_LENGTH(cadena_comprimida):
+UNHEX(cadena):
+UPPER(cadena):
