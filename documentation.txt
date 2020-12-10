@@ -453,13 +453,23 @@ CONCAT_WS(separador, cadena1,cadena2 ,...):Significa CONCAT WITH Separator(CONCA
 	EJEMPLO:
 			select concat_ws(" | ",cod_producto,descripcion,costo,precio_venta) as datos FROM productos;
 
-CONV(numero,de_base_a_base):
+CONV(numero,de_base_a_base):Convierte numeros entre diferentes bases numericas. Retorna una presentacion de cadena de caracteres para el numero numero,convertido en base origen a base destino. Retorna NULL si algun argumento numero se interpreta como entero.
 	EJEMPLO:
+	select conv(cod_producto,10,16) as hexadecimal,descripcion from productos;(Convierte de base 10 a Hexadecimal[Base 16])
+
+ELT(numero,cadena1,cadena2,...):Retorna cadena1 si numero = 1,cadena2 si numero= 2,y asi sucesivamente. Retorna NULL si numero es menor que 1 o mayor que el numero de argumentos.
+	EJEMPLO:
+	select elt(1,"Primero","Segundo","Tercero") as Ordinal;
+
+EXPORT_SET(bits,on,off,separador,#bits):Retorna una cadena en que para cada bit del valor bits,puede obtener una cadena on y para cada bit reasignado obtiene una cadena off.Los bits en bits se examinan de derecha a izquierda (de bots menores a mayores).Las cadenas se añaden al resultado de isquierda a derecha, separados por la cadena separador(siendo el carácter por defecto la coma ',').El número de bits examinados se obtiene por numbre_of_bits(por defecto 64).
+	EJEMPLO:
+	select export_set(5,'Y','N','-',4);
+
+FIELD(buscar,cadena1,cadena2,...):Retorna el indice de buscar en la lista cadena1,cadena2,...Retorna 0 si no se encuentra buscar.
+Si todo los argumentos de FIELD() son cadenas, todos los argumentos se comparan como cadens. Si todos los argumentos son números, se comparan como números.De otro modo, los argumentos se comparan como números con doble precisión.
+Si buscar es NULL, el valor retornado es 0 porque NULL falla en comparaciones de comparación con cualquier valor,FIELD() es el complemento de ELT().
 
 
-ELT(numero,cadena1,cadena2,...):
-EXPORT_SET(bits,on,off,separador,#bits):
-FIELD(cadena,cadena1,cadena2,...):
 FIND_IN_SET(cadena,lista_cadena):
 HEX(numero_o_cadena):
 FIND_IN_SET(cadena,lista_cadena):
