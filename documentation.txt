@@ -1,4 +1,4 @@
-CURSO BD CON ALEJANDRO GUZMAN
+ CURSO BD CON ALEJANDRO GUZMAN
 
 
 ***************** Comandos para Crear DB *****************
@@ -468,13 +468,30 @@ EXPORT_SET(bits,on,off,separador,#bits):Retorna una cadena en que para cada bit 
 FIELD(buscar,cadena1,cadena2,...):Retorna el indice de buscar en la lista cadena1,cadena2,...Retorna 0 si no se encuentra buscar.
 Si todo los argumentos de FIELD() son cadenas, todos los argumentos se comparan como cadens. Si todos los argumentos son números, se comparan como números.De otro modo, los argumentos se comparan como números con doble precisión.
 Si buscar es NULL, el valor retornado es 0 porque NULL falla en comparaciones de comparación con cualquier valor,FIELD() es el complemento de ELT().
+	EJEMPLO:
+	select field("ALE","AGC","ALE","ALEGUZMAN") as encontrado;
+	select field("Consola Videojuegos Play 4",descripcion) as Encontrado,cod_producto from productos;
 
+FIND_IN_SET(cadena,lista_cadena):Retorna un valor en el rango de 1 a N si la cadena buscar está en la lista de cadenas lista_cadena consistente de N subcadenas. Una lista de cadenas es una cadena compuesta de subcadenas separadas por caracteres','.Si el primer argumento es una cadena constante y el segundo es una columna de tipo SET, la función FIND_IN_SET() está optimizada para usar artimética de bit. Retorna 0 si buscar no está en lista_cadena o si lista_cadena es la cadena vacía. Retorna NULL si algún argumento si el primer argumento contiwnw un cáracter de coma(',').
+	EJEMPLO:
+	select find_in_set("Guzman","Alejandro,Guzman,Castellanos") as Encontrado;
 
+HEX(numero_o_cadena):Si numero_o_cadena es un número, retorna una cadena de representación del valor hexadecimal de numero, donde numero es un número muy grande (BIGINT).Esto es equivalente a CONV(N,10,16).
+
+Si numero_o_cadena es una cadena,esta función retorna una cadena hexadecimal de cadena caracteres, donde cada carácter en cadena se convierte a dos dígitos hexadecimales.
+	EJEMPLO:
+	select hex("alejandro") as resultado;
+	select 0x616C656A616E64726F as resultado;
 FIND_IN_SET(cadena,lista_cadena):
-HEX(numero_o_cadena):
-FIND_IN_SET(cadena,lista_cadena):
-INSERT(cadena,pos,longitud,nuevacadena):
-INSTR(cadena,subcadena):
+
+INSERT(cadena,pos,longitud,nuevacadena):Retorna la cadena cadena, con la subcadena comenzando en la posición pos y longitud caracteres reemplazados por la cadena nuevacadena. Retorna la cadena original si pos no esta entre la longitud de la cadena. Remplaza el resto de la cadena a partir de la posición por su longitud no está dentro de la longitud del resto de la cadena. Retorna NULL si cualquier argumento es nulo.
+	EJEMPLO:
+	select insert(descripcion,9,0,"en oferta - ") from productos where descripcion like "Consola%";
+
+INSTR(cadena,subcadena):Retorna la posición de la primera ocurrencia de la subcadena subcadena en la cadena cadena.
+	EJEMPLO:
+	select instr(descripcion,"Videojuegos") as resultado, cod_producto from productos;
+
 LCASE(cadena):
 LEFT(cadena,longitud):
 LENGTH(cadena):
