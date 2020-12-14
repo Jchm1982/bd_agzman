@@ -492,16 +492,55 @@ INSTR(cadena,subcadena):Retorna la posición de la primera ocurrencia de la subc
 	EJEMPLO:
 	select instr(descripcion,"Videojuegos") as resultado, cod_producto from productos;
 
-LCASE(cadena):
-LEFT(cadena,longitud):
-LENGTH(cadena):
-LOAD_FILE(archivo):
-LOCATE(subcadena,cadena,[posicion]):
-LOWER(cadena):
-LPAD(cadena,longitud,cadenapad):
-LTRIM(cadena):
-MAKE_SET(bits,cadena1,cadena2,...):
+LCASE(cadena)
+LOWER(cadena):Retorna la cadena cadena con todos los caracteres cambiadosa minuscula segun el mapeo del conjunto de caracteres actual(por defectos es ISO-8859-1 Latin1)
+	EJEMPLO:
+	select lower(descripcion) from productos;
+
+LEFT(cadena,longitud):Retorna los longitud caracteres empezando por la izquierda de la cadena cadena.
+	EJEMPLO:
+	select left(descricpion,8) as abreviado from productos;
+
+LENGTH(cadena):Retorna la longitud de la cadena cadena, medida en bytes.Un caracter multi-byte cuenta como múltiples bytes. Esto siginifica que para cadenas que contengan cinco caracteres de dos bytes, LENGTH() retorna 10, MIentras que CHAR_LENGTH() retorna 5.
+	EJEMPLO:
+	select cod_producto, length(descripcion) as longitud from productos;
+
+LOAD_FILE(archivo):Lee el archivo y retorna el contenido como cadena de caracteres. El archivo ebe estar localizado en el servidor, debe especificar la ruta completa al archiv, y dene tener el privilegio FILE. El archivo debe ser legible por todo el mundo y su tamaño menor a max_allowed_packet bytes.
+
+Si el archivo no existe o no puede ser leido debido a que una de las anteriores condiciones no se cumple, la funcion retorna NULL.
+	EJEMPLO:
+	alter table 'productos' add 'caracteristicas' BLOB NULL default NULL;
+
+	update productos set caracteristicas=load_file("ps4.txt") where cod_producto =773819011;
+
+LOCATE(subcadena,cadena)
+LOCATE(subcadena,cadena,[posicion]):La primera retorna la posicion de la primera ocurrencia de la subcadena subcadena en la cadena.
+	La segunda sintacis retorna la posición de la primera ocurrencia de la subcadena subcadena en la cadena cadena, comenzando en la posición posicion. Retorna 0 si subcadena no está en cadena.
+	SINTAXIS:
+	LOCATE(subcadena, cadena)
+	 POSITION(subcadena IN cadena)
+	INSTR(cadena, subcadena)
+
+	Observa que la sitaxis 1 es muy parecida a la función INSTR que vimos hace un momento, sin embargo, los argumentos están invertidos.
+	LOCATE y POSITION son sinónimos.
+	EJEMPLO:
+	select locate ("videojuegos", descripcion) as busqueda, cod_producto from productos;
+
+LPAD(cadena,longitud,cadenapad):Retorna la cadena cadena,alineado a la isquierda con la cadena cadenapad a una longitud de longitud caracteres.Si cadena es mayor que longitud, el valor retornado se acorta a longitud caracteres.
+	EJEMPLO:
+	select LPAD('que tal',12,'Hola ');
+LTRIM(cadena):Retorna la cadena cadena con los caracteres en blanco iniciales eliminados. Se puede utilizar para ajustar números a la izquierda en la salida del select.
+	EJEMPLO:
+	select ltrim("	Cadena de texto");Limpia el texto
+	select ltrim(cod_producto) from productos;
+
+MAKE_SET(bits,cadena1,cadena2,...):Retorna un conjunto de valores (una cadena conteniendo subcadenas separadas por caracteres ',') consistiendo en cadenas que tienen el bit correspondiente en bits asignado. cadena1 se corresponde el bit 0, cadena2 al bit 1, y así. 	Los valores NULL en caena1, cadena2, ... no se añaden al resultado.
+	EJEMPLO:
+	select make_set(1|8, 'hola','buenos','dias','mundo');
+
 MID(cadena,posicion,longutud):
+
+
 OCT(numero):
 OCTET_LENGTH(cadena):
 ORD(cadena):
