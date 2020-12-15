@@ -591,16 +591,55 @@ REVERSE(cadena):Retorna la cadena cadena con el orde de los caracteres invertido
 	EJEMPLO:
 	select cod_producto, reverse(descripcion) from productos;
 
-RIGHT(cadena,longitud):
-RPAD(cadena,longitud,cadenapad):
-RTRIM(cadena):
-SOUNDEX(cadena):
-SPACE(numero):
+RIGHT(cadena,longitud):Retorna los caracteres del lado derecho de la cadena cadena.
+	EJEMPLO:
+	select cod_producto, right(descripcion, 7) from productos;
+
+RPAD(cadena,longitud,cadenapad):Retorna la cadena cadena, alineada a la derecha con la cadena cadenapad con una longitud de longitud caracteres. Si cadena es mayor que longitud, el valor de retorno se corta a longitud caracteres.
+	EJEMPLO:
+	select rpad(decripcion,40," *oferta* ") from productos;
+
+RTRIM(cadena):Retorna la cadena cadena con los espacios precedentes eliminados.
+	EJEMPLO:
+	select rtrim('Texto con espacio a la derecha');
+
+SOUNDEX(cadena):Retorna una cadena soundex de cadea. Dos cadenas que suenen igual deben tener cadenas soundex idénticas. Una cadena soundex estándar tienen cuatro caracteres de longitud, pero la función SOUNDEX() retorna una cadena arvitrariamente larga.
+
+Puede usar SUBSTRING() en el resultado para obtener una cadena soundex estandar. Todos los caracteres no alfabeticos en cadena se ignoran. Todos los caracteres alfabeticos internacionales fuera de rango A-Z se tratan como vocales.
+	EJEMPLO:
+	select cod_producto, soundex(descripcion) from productos;
+
+SPACE(numero):Retorna la cadena consistente en numero caracteres blancos.
+	EJEMPLO:
+	select space(10),descripcion from productos where descripcion li "Consola%";
+	select concat(space(10),descripcion) from productos where descripcion like "Consola%"
+
+
 SUBSTRING(cadena,posicion[,longitud]):
-SUBSTRING_INDEX(cadena,delimitador,cont):
-TRIM({[BOTH| LEADING| TRAILING]} FROM):
-UCASE(cadena):
+
+
+SUBSTRING_INDEX(cadena,delimitador,cont):Retorna la subcadena de la cadena cadena antes de contador ocurrencias del delimitador delimitador.Si contador es positivo, todo a la izquierda del delimitador final(contando desde la izquierda) se retorna. Si contador es negativos, todo a la derecha del delimitador final(contando desde la derecha) re retorna.
+	EJEMPLO:
+	select substring_index('www.mipagina.com','.',1);
+	select substring_index('www.mipagina.com','.',2)
+
+TRIM({[BOTH| LEADING| TRAILING]} FROM):Retorna la cadena cadena con todos los prefijo y/o sufijos sufijo eliminados.Si ninguno de los especificadores BOTH, LEADING, TRAILING, se asume BOTH.
+
+Si sufijo es opcional y no se especifica, los espacios se eliminan.
+	EJEMPLO:
+	select trim('   bar   ');Eliminara los espacios de los costados
+	select trim(LEADING 'x' from 'xxxbarxxx');Aqui quitara todas las x al principio
+	select trim(BOTH 'x' from 'xxxbarxxx');Eliminara todas las x de ambos lados
+	select trim(TRAILING 'xyz' from 'barxxyz');Eliminara todos los espacios despues de xyz
+
+UCASE(cadena):Retorna la cadena cadena con todos los caracteres cambiados a mayusculas según el mapeo del conjunto de caracteres actual (por defecto es ISO-8859-1 Latin1)
+	EJEMPLO:
+	select ucase(descripcion) from productos;
+
 UNCOMPRESS(cadena_comprimida):
+
 UNCOMPRESSED_LENGTH(cadena_comprimida):
+
 UNHEX(cadena):
+
 UPPER(cadena):
