@@ -538,17 +538,59 @@ MAKE_SET(bits,cadena1,cadena2,...):Retorna un conjunto de valores (una cadena co
 	EJEMPLO:
 	select make_set(1|8, 'hola','buenos','dias','mundo');
 
-MID(cadena,posicion,longutud):
+MID(cadena,posicion,longutud)
 
+SUBSTRING(cadena,pos)
+SUBSTRING(cadena FROM posicion)
 
-OCT(numero):
+SUBSTRING(cadena,posicion,longitud)
+SUBSTRING(cadena FROM posicion FOR longitud)
+La forma de está sintaxis sin el argumento longitud(las que no tienen) regresan una subcadena de la cadena especificada en el parametro cadena, comenzando en la posicion indicada en posicion.
+
+Y las que tengan longitud regresan como resultado una longitud especificada en longitud a partir de la cadena especificada comenzando en la posicion indicada en el parametro posicion
+
+Las formas que usan el FROM son sintaxis SQL estandard. En MySQL 5.0. es posible usar valores negativos para posicion. En este caso, el inicio de la subcadena son posicion caracteres a partir del final de la cadena, enlugar del principio.
+
+Un valor negativo puede usarse para posicion en cualquier de las formas de está función.
+	EJEMPLO:
+	select substring(descripcion,5) as reducido from productos;
+
+OCT(numero):Retorna una representación en cadena del valor octalde numero,donde numero es un numero largo(BIGINT). Retorna NULL si numer es NULL.
+	EJEMPLO:
+	select oct(cod_producto), descripcion from productos;
+
 OCTET_LENGTH(cadena):
-ORD(cadena):
+
+ORD(cadena):Si el caracter más a la izquierda de la cadena cadena es un carácter multi-byte, retorna el código d ese carácter, calculado a partir del valor numérico de sus bytes usando esta fórmula:
+(1st byte code)
++(2nd byte code * 256)
++(3rd byte code * 2562)...
+
+Si el caracter más al a izquierda no es multi-byte, ORD() retorna el mismo valor que la función. ASCCII().
+	EJEMPLO:
+	select ORD(descripcion) from productos;
+
 POSITION(subcadena IN cadena):
-QUOTE(cadena):
-REPEAT(cadena,contador):
-REPLACE(cadena,de_cadena,a_ cadena):
-REVERSE(cadena):
+
+QUOTE(cadena):Acota una cadena para producir un resultado que puede usarse como un valor con caracteres de escape en un comando SQL.La cadena se retorna rodeado por comillas sencillas y con cada instancia de comillas sencilla(' ' '), antibarra('\'), ACII NUL, y control-Z predecidos por una antibarra.
+
+Si el argumento es NULL, el valor de retorno es la palabra "NULL" sin comillas alrededor.
+	EJEMPLO:
+	select quote ("Don't do that.");Encapsula el caracter especial
+
+REPEAT(cadena,contador):Retorna una cadena consistente de la cadena repetida cantidad veces. SI cantidad <=0.Retorna una cadena vacía. Retirna NULL si cadena o cantidad son NULL.
+	EJEMPLO:
+	select repeat("Hola",5);
+	select repeat("*",40);
+
+REPLACE(cadena,de_cadena,a_ cadena):Retorna la cadena cadena contodas las ocurrencias de la cadena de_cadena remplazadas con la cadena a_cadena.
+	EJEMPLO:
+	select replace(descripcion, "VideoJuegos","Gamer") from productos;
+
+REVERSE(cadena):Retorna la cadena cadena con el orde de los caracteres invertidos.
+	EJEMPLO:
+	select cod_producto, reverse(descripcion) from productos;
+
 RIGHT(cadena,longitud):
 RPAD(cadena,longitud,cadenapad):
 RTRIM(cadena):
