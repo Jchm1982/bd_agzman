@@ -752,3 +752,60 @@ TRUNCATE(x,d):Retorna el número x, truncado a d decimales. Si d es 0, el result
 
 		######################## FUNCIONES FECHA ########################
 
+ADDDATE():Adiciona intervalos de hora/fecha a una fecha y devuelve una fecha. Agregar valores de tiempo a un valor de fecha.
+	Sintaxis1: select adddate(fecha,INTERVAl expresión(numerica) unidad(puede ser DAY, WEEK,MONTH,YEAR))
+	Sintaxis2: select adddate(fecha,dias)
+	EJEMPLO:
+	select adddate('2020-03-25',INTERVAL 12 DAY);
+	select adddate('2020-03-25',INTERVAL 4 WEEK)
+	select adddate('2020-03-25',INTERVAL 2 MONTH);
+	select adddate('2020-03-25',INTERVAL 1 YEAR);
+	select adddate('2020-03-25',INTERVAL 1 YEAR);
+	select adddate('2020-03-25',8);
+
+ADDTIME():Adiciona intervalos de hora a una fecha/hora y devuelve una hora/fechahora
+	Sintaxis: SELECT ADDTIME(expr1(HH:MM:SS.cc),expr2(AAAA-MM-DD HH:MM:SS.ccc))
+	EJEMPLO:
+	SELECT ADDTIME('2020-03-25 09:45:20','23:05:10');
+	SELECT ADDTIME('09:45:20','00:14:10');
+
+
+CONVERT_TZ():Permite convertir fecha/hora de una zona horaria a otra.
+	Sintaxis: SELECT CONVERT_TZ(fechahora(AAAA-MM-DD HH:MM:SS.ccc),de_tz{+ | -}, a_tz{ 00:00 })
+	EJEMPLO:
+	SELECT CONVERT_TZ('2020-03-25 09:35:00','-05:00','+00:00');
+
+CURDATE():Retorna la fecha actual del sistema.
+	Sintaxis1:SELECT CURDATE();
+	Sintaxis2:SELECT CURDATE()+0;
+	EJEMPLO:
+	select curdate();
+	select curdate() + 0;
+
+CURRENT_DATE():Sinónimo de CURDATE().
+	Sintaxis1:SELECT CURRENT_DATE();
+	Sintaxis2:SELECT CURRENT_DATE()+0;
+	EJEMPLO:
+	select current_date();
+	select current_date() + 1;
+
+
+CURRTIME():Retorna la hora actual del sistema.
+	Sintaxis1: SELECT CURTIME();
+	Sintaxis2: SELECT CURTIME() + 0;
+	EJEMPLO:
+	select curtime();
+	select curtime() + 0;
+
+CURRENT_TIME():Sinónimo de CURRTIME().
+	Sintaxis1: SELECT CURRENT_TIME();
+	Sintaxis2: SELECT CURRENT_TIME() + 0;
+	EJEMPLO:
+	select current_time();
+	select current_time() + 0;
+
+
+CURRENT_TIMETAMP():Retorna la fecha y hora actual del sistema. Es un sinonimo para NOW() que se vera más adelante.
+	Sintaxis1: SELECT CURRENT_TIMETAMP();
+	Sintaxis2: SELECT CURRENT_TIMETAMP() + 0;
+	EJEMPLO:
