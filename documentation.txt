@@ -331,7 +331,7 @@ Función LEAST():Devuelve el argumento mas pequeño de 2 o más argumentos.Si el
 	Ejemplo ->SELECT LEAST(15,10,25), aqui arrojara el numero 10 como resultado
 			  SELECT LEAST("z","m","s"), aqui arrojara la letra m.
 
-  ******************************* OPERADORES LOGICOS ****************************
+  			******************************* OPERADORES LOGICOS ****************************
 En MySQL todos los operadores logico se valuan a TRUE, FALSE o NULL(UNKNOWN). Y se implementa de la siguiente forma:
 	1->TRUE
 	0->FALSE
@@ -368,7 +368,8 @@ Ejemplos:
 	SELECT 1 XOR 0; 	-> 1
 	SELECT 1 XOR NULL; 	-> NULL
 	SELECT 1 XOR 1 XOR 1; 	-> 1
-	******************************* FUNCIONES DE CONTROL DE FLUJO ****************************
+
+			******************************* FUNCIONES DE CONTROL DE FLUJO ****************************
 
 CASE:Se basa en la evaluación de una expresion y cada valor posible se puede especificar en una clausula WHEN de forma independiente.Else puede eliminarse.
 	CASE expresion
@@ -408,7 +409,7 @@ NULLIF:Compara 2 expresiones y retorna null si ambas expresiones son exactamente
 	EJEMPLO:
 		SELECT descripcion,NULLIF(precio_venta,costo) as "sin utilidad" FROM productos;
 
-******************************* FUNCIONES CON CADENAS ****************************
+		######################## FUNCIONES CON CADENAS ########################
 ASC(cadena):Retorna el valor numerico del caracter mas a las izquierda de la cadena de caracteres cadena. Retorna 0 si cadena es la cadena vacia. Retorna NULL si cadena es NULL. ASCII() funciona para caracteres con valores numericos de 0 a 255.
 	EJEMPLO:
 	select ASCII(5);
@@ -636,10 +637,118 @@ UCASE(cadena):Retorna la cadena cadena con todos los caracteres cambiados a mayu
 	EJEMPLO:
 	select ucase(descripcion) from productos;
 
-UNCOMPRESS(cadena_comprimida):
+UNCOMPRESS(cadena_comprimida):Descomprime una cadena_comprimida con la función COMPRESS(). Si el argumento no es un valor comprimido, el resultado es NULL.
+	EJEMPLO:
+	update productos set deescripcion=compress(descripcion) where cod_producto = 773819011;
+	select descripcion from productos where cod_producto = 773819011;
 
-UNCOMPRESSED_LENGTH(cadena_comprimida):
+	select uncompress(descripcion) from productos where cod_producto =773819011;
 
-UNHEX(cadena):
+UNCOMPRESSED_LENGTH(cadena_comprimida):Retorna la longitud de cadena_comprimida antes de la compresión.
+	EJEMPLO:
+	select uncompress_length(descripcion) from productos where cod_producto =773819011;
+	select lenght(descripcion) from productos where cod_producto = 773819011;
 
-UPPER(cadena):
+UNHEX(cadena):Realiza la operación apouesta a HEX(cadena).ESto es, interpreta cada par de dígitos hexadecimales en el argimento como números y los convierte al carácter representado por el número. El caracteres resultantes se retorna como cadena binaria.
+	EJEMPLO:
+	select unhex("545620346B2036352070756C6761646173");Regresara una cadena de forma correcta
+
+UPPER(cadena):Retorna la cadena cadena especificada con todos los caracteres cambiado a mayusculas segun el mapeo del conjunto de caracteres actual(por defecto es ISO-8859-1 Latin1)
+	EJEMPLO:
+	select UPPER(descripcion) from productos;igual que UCASE()
+
+				######################## FUNCIONES MATEMATICAS ########################
+
+TODAS LAS FUNCIONES MATEMATICAS RETORNARÁN NULL EN CASO DE ESTAR MAL.
+
+ABS(X):Retorna el valor absoluto de x.Esta funcion puede usar valores BIGINT
+	EJEMPLO:
+	select abs(2);
+	select abs(-32);
+
+ACOS(X):Retorna el ARCOSENO de x,esto es, elvalor cuyo coseno es x.Retorna NULL si x no está en el rango -1 a 1.
+	EJEMPLO:
+	select acos(1);
+
+ASIN(X):Retorna el arcoseno de x,esto es, el valor cuyo seno es x.Retorna NULL si x noestña en el rango de -1 a 1.
+
+ATAN(X):Retorna la arcotangente de x, estos es, el calor cuya tangente es x.Y la forma de usuarlas es la siguiente:
+	ATAN(y,x)		ATAN2(y,x)
+	Regresa la arcotangente de las variables X y Y. Es similar a calcular la arcotangente de y/x, excepto que los signos de ambos argumentos se usan para determinar el cuadrante del resultado.
+
+CEILING(X) CEIL(X):Retorna el entero más pequeño no menos a x. Estas dos funciones son sinónimos. Tenga en cuenta que el valor retornado se convierte a BIGINT.
+	EJEMPLO:
+
+COS(X):Retorna el coseno de x, donde x se da en radianes.
+
+COT(X):Retorna la cotangente de x.
+
+CRC32(EXP):Computa un valor de redundancia cíclica y retorna el valor sin signo de 32 bits. El resultado es NULL si el argumento es NULL. Se espera que el argumento sea una cadena y(si es posible) se trata como una si no lo es.
+	EJEMPLO:
+	select crc32('MySQL');
+
+DEGREES(x):Retorna el argumento x, convertido de radianes a grados.
+
+EXP(x):Retorna el valor de e(labase del logaritmo natural) a la potenia de x.
+
+FLOOR(x):Retorna el valor entero más grande pero no mayor a x.
+
+LN(x):Retorna el logaritmo natural de x, estos es, el logaritmo de x base e.
+
+LOG(x) LOG(b,x):Tiene dos forma, como están anteriormente. Retorna el logaritmos natural de x, estos es, el logaritmo de x base e. Si se llama con dos parámetros, esta función retorna el logaritmo de x para una base arbitrária b.
+
+LOG2(x):Retonra el logaritm en base 2 de x. LOG2() es útil para encontrar cuántos bits necesita un número para almacenamiento. Está función es equivalente a la expresió LOG(X) / LOG(2).
+
+LOG10(x):Retorna el logaritmo en base 10 de x.
+
+MOD(n,m) n%m nMODm:Operación de módulo. Retorna el resto de n dividido por m.Está función puede usar valores BIGINT. MOD() también funciona con valores con una parte fraccional y retorna el resto exacto tras la divisón.
+
+PI():Retorna el valor de pi. El número de decimales que se muestra por defecto es siete, pero MySQL usa internamente el valor de doble precisión entrero.
+	EJEMPLO:
+	select pi();
+	select pi()+0.0000000000000000000;
+
+POW(x,y) POWER(x,y):Retorna el valor de x a la potencia de y.
+	EJEMPLO:
+	SELECT pow(2,3);Retorna 8
+	SELECT pow(2,-2);Retorna 0.25
+
+RADIANS()x:Retorna el argumento x,convertido de grados a radianes.(Tenga en cuenta  que pi radianes sin 180 grados)
+
+RAND() RAND(n):Retora un valor aleatorio en coma flotante del rango de 0 1 1.0. Si se especifica un argumento entero n, se usa como semilla, que produce una secuencia repetible. Hay que tener en cuenta que RAND() en una clausula WHEREse re-evalua cada vez que se ejecuta el WHERE.
+
+RAND() No pretende ser un generador de números aleatorios perfectos, pero es una forma rápida de generar números aleatorios ad hoc portable entre plataformas para la misma versión de MySQL.
+	EJEMPLO:
+	select rand();
+	select rand(20);
+
+ROUND(x) ROUND(x,d):Retorn el argumento x, redondeando al entero más cercano. Con 2 argumentos, retorna x redondeando a d decimales. d Puede ser negativo para redondear d dígitos a la izquierda del punto decimal del valor x.
+	EJEMPLO:
+	select round(-1.23);Redondea a -1
+	select round(-1.58);Redondea a -2
+
+SIGN(x):Retorna el signo del argumento como -1,0, o 1, en funcion de si x es negativo, cero o positivo.
+	EJEMPLO:
+	select sign(-32);Regresa -1
+	select sign(0);Regresa 0
+	select sign(32);Regresa 1
+
+SIN(x):Retorna el seno de x, donde x se da en radianes.
+	EJEMPLO:
+	select sin(pi());
+
+SQRT(x):Retorna la raíz cuadrada de un número no negativo x.
+	EJEMPLO:
+	select sqrt(4);
+	select sqrt(20);raiza cuadrado
+
+TAN(x):Retorna la tangente de x, donde x se da en radianes.
+	EJEMPLO:
+	select tan(pi());
+
+TRUNCATE(x,d):Retorna el número x, truncado a d decimales. Si d es 0, el resultado no tiene punto decimal o parte fraccional. d puede ser negativo para truncar(hcer cero) d dígitos a la izquierda del punto decimal del valor x.
+	EJEMPLO:
+	select truncate(1.223,1);Truncara el valor a 1 decimal
+
+		######################## FUNCIONES FECHA ########################
+
