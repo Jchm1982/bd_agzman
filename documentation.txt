@@ -809,3 +809,67 @@ CURRENT_TIMETAMP():Retorna la fecha y hora actual del sistema. Es un sinonimo pa
 	Sintaxis1: SELECT CURRENT_TIMETAMP();
 	Sintaxis2: SELECT CURRENT_TIMETAMP() + 0;
 	EJEMPLO:
+
+DATE():Extrae la parte de fecha de una expresión de fecha o fecha y hora.
+	Sintaxis1:SELECT DATE('2020-03-25 08:38:25');
+	EJEMPLO:
+	select date('2020-03-25 08:38:25');
+
+DATE_ADD():Agregar valores de tiempo (Intervalos) a un valor de fecha. Esta función es sinónimo de ADDDATE().
+	Sintaxis1:SELECT DATE_ADD(fecha(AAAA-MM-DD), INTERVAL expresión(# # #) unidad(puede ser DAY, WEEK,MONTH,YEAR));
+	Sintaxis2:SELECT DATE_ADD(fecha,dias);
+	EJEMPLO:
+	select date_add('2020-03-25',INTERVAL 12 DAY);
+	select date_add('2020-03-25',INTERVAL 4 WEEK);
+	select date_add('2020-03-25',INTERVAL 2 MONTH);
+	select date_add('2020-03-25',INTERVAL 1 YEAR);
+
+DATE_FORMAT():Formato de fecha como se especifica.
+	Sintaxis1:SELECT DATE_FORMAT(fecha(AAAA-MM-DD),formato(%a,%b,%c,...));
+		%a Abreviatura del nombre del dia de la semana
+		%b Abreviatura del nombre del mes
+		%D Día del mes con sufijo en ingles
+		%d Dia del mes, numero (00..31)
+		%e Dia del mes, numero (0..31)
+		%f Microsegundos (000000..999999)
+		%H Horas (00..23)
+		%h Horas (01..12)
+		%I Horas (01..12)
+		%i Minutos, numérico (00..59)
+		%k Horas (0..23)
+		%l Horas (1..12)
+		%j Dia del año (001..366)
+		%M Nombre del mes (January...December)
+		%m Mes, numérico(01..12)
+		%p am / pm
+		%r Hora en formato 12, seguido de am/pm
+		%S o %s Segundos (00..59)
+		%T Hora, formato 23 horas, hh:mm:ss
+		%U Semana, Domingo como primer dia de la semana
+		%u Semana, Lunes como primer dia de la semana
+		%V Semana (01..53) Domingo primer dia, con %X
+		%v Semana (01..53) Lunes primer dia, con %x
+		%W Nombre dia de la semana (Sunday...Saturday)
+		%w Dia de la semana (0=Domingo, 6=Sabado)
+		%X Año para la semana, Domingo primer dia de la semana, numerico, 4 dígitos, con $V
+		%x Año para la semana, Lunes primer dia de la semana, numérico, 4 dígitos, con %v
+		%Y Año, númerico, 4 dígitos
+		%y Año, numérico, 2 dígitos
+		%% Un carácter literal %
+	EJEMPLO:
+	select date_format('2020-03-25','%a');
+	select date_format('2020-03-25 18:30:25','%W %D %M %Y %h:%i%p');Regresa Wednesday 25th March 2020 06:30PM
+
+DATE_SUB():Resta un valor de tiempo (intervalo) de una fecha.
+
+DATEDIFF():Resta dos fechas.
+
+DAY():Sinónimo de DAYOFMONTH()
+
+DAYNAME():Devuele le nombre del dia de la semana
+
+DAYOFMONTH():Devuelve el día del mes(0-31).
+
+DAYOFWEEK():Devuelve el índice del día de la semana del argumento.
+
+DAYOFYEAR():devuelve el díe del año (1-366).
