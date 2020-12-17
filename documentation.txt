@@ -13,6 +13,18 @@ USE 'nombre de la BD';
 ***************** VER TABLAS QUE CONTIENE DB *****************
 SHOW TABLES;
 
+Sintaxis para mostar solo el nombre:
+SELECT COLUMN_NAME
+     FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE table_name = 'tbl_name'
+     [AND table_schema = 'db_name']
+     [AND column_name LIKE 'wild']
+
+SHOW COLUMNS
+FROM tbl_name
+[FROM db_name]
+[LIKE 'wild']
+
 ***************** ELIMINAR DB *****************
 DROP DATABASE 'nombre de BD a borrar';
 
