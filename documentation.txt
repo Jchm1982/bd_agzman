@@ -873,15 +873,36 @@ DATE_FORMAT():Formato de fecha como se especifica.
 	select date_format('2020-03-25 18:30:25','%W %D %M %Y %h:%i%p');Regresa Wednesday 25th March 2020 06:30PM
 
 DATE_SUB():Resta un valor de tiempo (intervalo) de una fecha.
+	Sintaxis: SELECT DATE_SUB(fecha[AAAA-MM-DD],INTERVAL expresión[# # #] unidad[DAY, WEEK, MONTH, YEAR])
+	EJEMPLO:
+	select date_sub('1998-01-02', INTERVAL 31 DAY);->Le quita 31 dias y muestra fecha del mes pasado.
 
-DATEDIFF():Resta dos fechas.
+DATEDIFF():Resta dos fechas. Devuelve fecha1-fecha2 expresado como valor en días desde una fecha a la otra. fecha1 y fecha2 son expresiones de fecha o fecha y hora. Solo las partes de fecha de los valores se utilizan en el cálculo.
+	Sintaxis: SELECT DATEDIFF(fecha1,fecha2)
+	EJEMPLO:
+	select datediff('2020-03-25','2020-04-18');Muestra la diferencia en días
 
-DAY():Sinónimo de DAYOFMONTH()
+DAY():Sinónimo de DAYOFMONTH(). Devuelveel día del mes para la fecha, en el rango de 1 a 31.
+	Sintaxis: SELECT DAY(fecha[AAAA-MM-DD])
+	EJEMPLO:
+	select day('2020-03-25');
 
-DAYNAME():Devuele le nombre del dia de la semana
+DAYNAME():Devuele le nombre del dia de la semana.
+	Sintaxis: SELECT DAYNAME(fecha[AAAA-MM-DD])
+	EJEMPLO:
+	select dayname('2020-04-27');Muestra el día en ingles de la semana
 
-DAYOFMONTH():Devuelve el día del mes(0-31).
+DAYOFMONTH():Sinonimo de DAY().Devuelve el día del mes para la fecha, en el rango de (0-31).
+	Sintaxis: SELECT DAYOFMONTH(fecha[AAAA-MM-DD])
+	EJEMPLO:
+	select dayofmonth('2020-03-25');
 
-DAYOFWEEK():Devuelve el índice del día de la semana del argumento.
+DAYOFWEEK():Devuelve el índice del día de la semana para la fecha.En ingles (1=domingo,2=lunes, ...,7=sábado).Estos Valores de índice corresponden al estándar ODBC.
+	Sintaxis: SELECT DAYOFWEEK(fecha[AAAA-MM-DD])
+	EJEMPLO:
+	select dayofweek('2020-03-25');
 
 DAYOFYEAR():devuelve el díe del año (1-366).
+	Sintaxis: SELECT DAYOFYEAR(fecha[AAAA-MM-DD])
+	EJEMPLO:
+	select dayofyear('2020-03-25');
