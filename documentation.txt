@@ -906,3 +906,62 @@ DAYOFYEAR():devuelve el díe del año (1-366).
 	Sintaxis: SELECT DAYOFYEAR(fecha[AAAA-MM-DD])
 	EJEMPLO:
 	select dayofyear('2020-03-25');
+
+MAKEDATE():Crear una fecha del año y día del año.
+	Sintaxis:SELECT MAKEDATE(año[AAAA],días)
+	EJEMPLO:
+	select makedate(2020,10);
+	select makedate(2020,55);
+	select makedate(2020,83);
+
+MAKETIME():Crea una hora(tiempo) desde hora, minuto, segundo.
+	Sintaxis:SELECT MAKETIME(horas[##],minutos[##],segundos[##]);
+	EJEMPLO:
+	select maketime(12,25,38);
+	select maketime(18,40,05);
+
+MICROSECOND():Devuelve los microsegundos del argumento
+	Sintaxis: SELECT MICROSECOND('expresion[AAAA-MM-DD HH:MM:SS.ccc]');
+	EJEMPLO:
+	select microsecond('12:05:00.28743');Solo trae los microsegundos
+	select microsecond('18:10:02.12');
+
+MINUTE():Devuelve el minuto del argumento.
+	Sintaxis: SELECT MINUTE('expresion[AAAA-MM-DD HH:MM:SS.ccc]');
+	EJEMPLO:
+	select minute('2020-05-12 10:05:03');Devuelve los minutos
+
+MONTH():Devuelve el mes desde la fecha argumento
+	Sintaxis: SELECT MONTH('fecha[AAAA-MM-DD]');
+	EJEMPLO:
+	select month('2020-04-29');Muestra el mes 4
+
+MONTHNAME():Devuelve el nombre del mes del argumento.
+	Sintaxis:SELECT MONTHNAME('fecha[AAAA-MM-DD]');
+	EJEMPLO:
+	select monthname('2020-04-25');Mostrara como resultado April
+	select monthname('2020-07-10');
+
+NOW():Devuelve la fecha y hora actuales.
+	Sintaxis1:SELECT NOW();
+	Sintaxis2:SELECT NOW()+0;
+	EJEMPLO:
+	select now();
+	select now() + 0;
+
+PERIOD_ADD():Agrega 'n' meses a un periodo (en el formato AAMM 0 AAAAMM).Devuelve un valor en el formato AAAAMM
+	Sintaxis:SELECT PERIOD_ADD(periodo[AAAAMM],meses[##])
+	EJEMPLO:
+	select period_add(202004,5);
+	select period_add(202004,20);
+
+PERIOD_DIFF():Devuelve la diferencia entre 2 periodos, especificados cada uno como AAAAMM.
+	Sintaxis:SELECT PERIOD_DIFF(periodo-inicial[AAAAMM],periodo-final[AAAAMM])
+	EJEMPLO:
+	select period_diff(202012,202004);
+
+QUARTER():Devuelve el trimestre de un argumento de fecha
+	Sintaxis:SELECT QUARTER('fecha[AAAA-MM-DD]');
+	EJEMPLO:
+	select quarter('2020-04-01');Muestra el trimestre que corresponde al año
+	select quarter('2020-12-01');
