@@ -965,3 +965,39 @@ QUARTER():Devuelve el trimestre de un argumento de fecha
 	EJEMPLO:
 	select quarter('2020-04-01');Muestra el trimestre que corresponde al año
 	select quarter('2020-12-01');
+
+SEC_TO_TIME():Convierte segundos a formato 'hh:mm:ss'. Devuelve el argumento segundos, convertidos a horas, minutos y segundos, como un valor tiempo. El tango del resultado está limitado al del tipo de datos TIME.Se produce una advertencia si el argumento corresponde a un valor fuera de ese rango.
+	Sintaxis:SELECT SEC_TO_TIME(segundo[###]);
+	EJEMPLO:
+	select sec_to_time(360);
+	select sec_to_time(360) + 0;
+
+SECOND():Devuelve el segundo(0-59) pra el argumento, en el rango de 0 a 59.
+	Sintaxis:SELECT SECOND(hora[HH:MM:SS])
+	EJEMPLO:
+	select second('10:28:03');Devuelve solo los segundos
+
+STR_TO_DATE():Convierte una cadena en una fecha.Esta es la inversa de la función DATE_FORMAT().Recibe como parametros una "cadena" y un "formato".STR_TO_DATE() devuelve un valor DATETIME si el "formato" contiene partes de fecha y hora,o un valor DATE u TIME si la "cadena" contiene solo partes de fecha u hora. Si el valor de fecha, hora o fecha y hora extraído de "cadena" es legal, STR_TO_DATE() devuelve NULL y genra una advertencia.
+	Sintaxis:SELECT STR_TO_DATE('cadena','formato');
+	EJEMPLO:
+	select str_to_date('1,5,20','%d,%m,%Y');
+	select str_to_date('May 1,2020','%M,%d,%Y');
+
+SUBDATE():Sinónimo de DATE_SUB() cuando se invoca con la forma INTERVAL del segundo argumento.
+	Sintaxis:SELECT SUBDATE('fecha'[AAAA-MM-DD],INTERVAL expresion[# # #] formato[DAY, WEEK, MONTH,YEAR]);
+	EJEMPLO:
+	select subdate('2020-05-01',INTERVAL 31 DAY);
+
+SUBTIME():Restar tiempos.Devuelve expresion1 - expresion2 expresado como un valor en el mismo formato que expresión1. Expresión1 es una expresión de hora o fecha y hora, y expre2 es una expresión de hora.
+	Sintaxis:SELECT SUBTIME(expresion1[AAAA-MM-DD HH:MM:SS.ccc],expresión2[HH:MM:SS.ccc])
+	EJEMPLO:
+	select subtime('02:35:00','01:15:00');Devuelve 1:20 la resta
+
+SYSDATE():Devuelve la hora a la que se ejecuta la funcion.Devuelve la fecha y hora actuales, como un valor en formati 'AAAA-MM-DD hh:mm:ss' o AAAAMMDDhhmmss, dependiendo de si la función se utiliza en cadena o contexto numérico.
+
+Devuelve la hora a la que se ejecuta. Esto difiere del comportamiento de NOW(), que devuelve un tiempo constante que indica el momento en que la declaración comenzó a ejecutarse.(Dentro de una función almacenafda o desencadenante, NOW() devuelve el momento en que la función o la declaración desencadenante comenzó a ejecutarse)
+
+	Sintaxis1: SELECT SYSDATE();
+	Sintaxis2: SELECT SYSDATE() + 0;
+	EJEMPLO:
+	select sysdate(),sleep(2),sydate();
