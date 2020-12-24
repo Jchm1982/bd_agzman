@@ -764,7 +764,7 @@ TRUNCATE(x,d):Retorna el número x, truncado a d decimales. Si d es 0, el result
 
 		######################## FUNCIONES FECHA ########################
 
-ADDDATE():Adiciona intervalos de hora/fecha a una fecha y devuelve una fecha. Agregar valores de tiempo a un valor de fecha.
+1.-ADDDATE():Adiciona intervalos de hora/fecha a una fecha y devuelve una fecha. Agregar valores de tiempo a un valor de fecha.
 	Sintaxis1: select adddate(fecha,INTERVAl expresión(numerica) unidad(puede ser DAY, WEEK,MONTH,YEAR))
 	Sintaxis2: select adddate(fecha,dias)
 	EJEMPLO:
@@ -775,26 +775,26 @@ ADDDATE():Adiciona intervalos de hora/fecha a una fecha y devuelve una fecha. Ag
 	select adddate('2020-03-25',INTERVAL 1 YEAR);
 	select adddate('2020-03-25',8);
 
-ADDTIME():Adiciona intervalos de hora a una fecha/hora y devuelve una hora/fechahora
+2.-ADDTIME():Adiciona intervalos de hora a una fecha/hora y devuelve una hora/fechahora
 	Sintaxis: SELECT ADDTIME(expr1(HH:MM:SS.cc),expr2(AAAA-MM-DD HH:MM:SS.ccc))
 	EJEMPLO:
 	SELECT ADDTIME('2020-03-25 09:45:20','23:05:10');
 	SELECT ADDTIME('09:45:20','00:14:10');
 
 
-CONVERT_TZ():Permite convertir fecha/hora de una zona horaria a otra.
+3.-CONVERT_TZ():Permite convertir fecha/hora de una zona horaria a otra.
 	Sintaxis: SELECT CONVERT_TZ(fechahora(AAAA-MM-DD HH:MM:SS.ccc),de_tz{+ | -}, a_tz{ 00:00 })
 	EJEMPLO:
 	SELECT CONVERT_TZ('2020-03-25 09:35:00','-05:00','+00:00');
 
-CURDATE():Retorna la fecha actual del sistema.
+4.-CURDATE():Retorna la fecha actual del sistema.
 	Sintaxis1:SELECT CURDATE();
 	Sintaxis2:SELECT CURDATE()+0;
 	EJEMPLO:
 	select curdate();
 	select curdate() + 0;
 
-CURRENT_DATE():Sinónimo de CURDATE().
+5.-CURRENT_DATE():Sinónimo de CURDATE().
 	Sintaxis1:SELECT CURRENT_DATE();
 	Sintaxis2:SELECT CURRENT_DATE()+0;
 	EJEMPLO:
@@ -802,14 +802,14 @@ CURRENT_DATE():Sinónimo de CURDATE().
 	select current_date() + 1;
 
 
-CURRTIME():Retorna la hora actual del sistema.
+6.-CURRTIME():Retorna la hora actual del sistema.
 	Sintaxis1: SELECT CURTIME();
 	Sintaxis2: SELECT CURTIME() + 0;
 	EJEMPLO:
 	select curtime();
 	select curtime() + 0;
 
-CURRENT_TIME():Sinónimo de CURRTIME().
+7.-CURRENT_TIME():Sinónimo de CURRTIME().
 	Sintaxis1: SELECT CURRENT_TIME();
 	Sintaxis2: SELECT CURRENT_TIME() + 0;
 	EJEMPLO:
@@ -817,17 +817,17 @@ CURRENT_TIME():Sinónimo de CURRTIME().
 	select current_time() + 0;
 
 
-CURRENT_TIMETAMP():Retorna la fecha y hora actual del sistema. Es un sinonimo para NOW() que se vera más adelante.
+8.-CURRENT_TIMETAMP():Retorna la fecha y hora actual del sistema. Es un sinonimo para NOW() que se vera más adelante.
 	Sintaxis1: SELECT CURRENT_TIMETAMP();
 	Sintaxis2: SELECT CURRENT_TIMETAMP() + 0;
 	EJEMPLO:
 
-DATE():Extrae la parte de fecha de una expresión de fecha o fecha y hora.
+9.-DATE():Extrae la parte de fecha de una expresión de fecha o fecha y hora.
 	Sintaxis1:SELECT DATE('2020-03-25 08:38:25');
 	EJEMPLO:
 	select date('2020-03-25 08:38:25');
 
-DATE_ADD():Agregar valores de tiempo (Intervalos) a un valor de fecha. Esta función es sinónimo de ADDDATE().
+10.-DATE_ADD():Agregar valores de tiempo (Intervalos) a un valor de fecha. Esta función es sinónimo de ADDDATE().
 	Sintaxis1:SELECT DATE_ADD(fecha(AAAA-MM-DD), INTERVAL expresión(# # #) unidad(puede ser DAY, WEEK,MONTH,YEAR));
 	Sintaxis2:SELECT DATE_ADD(fecha,dias);
 	EJEMPLO:
@@ -836,7 +836,7 @@ DATE_ADD():Agregar valores de tiempo (Intervalos) a un valor de fecha. Esta func
 	select date_add('2020-03-25',INTERVAL 2 MONTH);
 	select date_add('2020-03-25',INTERVAL 1 YEAR);
 
-DATE_FORMAT():Formato de fecha como se especifica.
+11.-DATE_FORMAT():Formato de fecha como se especifica.
 	Sintaxis1:SELECT DATE_FORMAT(fecha(AAAA-MM-DD),formato(%a,%b,%c,...));
 		%a Abreviatura del nombre del dia de la semana
 		%b Abreviatura del nombre del mes
@@ -872,128 +872,128 @@ DATE_FORMAT():Formato de fecha como se especifica.
 	select date_format('2020-03-25','%a');
 	select date_format('2020-03-25 18:30:25','%W %D %M %Y %h:%i%p');Regresa Wednesday 25th March 2020 06:30PM
 
-DATE_SUB():Resta un valor de tiempo (intervalo) de una fecha.
+12.-DATE_SUB():Resta un valor de tiempo (intervalo) de una fecha.
 	Sintaxis: SELECT DATE_SUB(fecha[AAAA-MM-DD],INTERVAL expresión[# # #] unidad[DAY, WEEK, MONTH, YEAR])
 	EJEMPLO:
 	select date_sub('1998-01-02', INTERVAL 31 DAY);->Le quita 31 dias y muestra fecha del mes pasado.
 
-DATEDIFF():Resta dos fechas. Devuelve fecha1-fecha2 expresado como valor en días desde una fecha a la otra. fecha1 y fecha2 son expresiones de fecha o fecha y hora. Solo las partes de fecha de los valores se utilizan en el cálculo.
+13.-DATEDIFF():Resta dos fechas. Devuelve fecha1-fecha2 expresado como valor en días desde una fecha a la otra. fecha1 y fecha2 son expresiones de fecha o fecha y hora. Solo las partes de fecha de los valores se utilizan en el cálculo.
 	Sintaxis: SELECT DATEDIFF(fecha1,fecha2)
 	EJEMPLO:
 	select datediff('2020-03-25','2020-04-18');Muestra la diferencia en días
 
-DAY():Sinónimo de DAYOFMONTH(). Devuelveel día del mes para la fecha, en el rango de 1 a 31.
+14.-DAY():Sinónimo de DAYOFMONTH(). Devuelveel día del mes para la fecha, en el rango de 1 a 31.
 	Sintaxis: SELECT DAY(fecha[AAAA-MM-DD])
 	EJEMPLO:
 	select day('2020-03-25');
 
-DAYNAME():Devuele le nombre del dia de la semana.
+15.-DAYNAME():Devuele le nombre del dia de la semana.
 	Sintaxis: SELECT DAYNAME(fecha[AAAA-MM-DD])
 	EJEMPLO:
 	select dayname('2020-04-27');Muestra el día en ingles de la semana
 
-DAYOFMONTH():Sinonimo de DAY().Devuelve el día del mes para la fecha, en el rango de (0-31).
+16.-DAYOFMONTH():Sinonimo de DAY().Devuelve el día del mes para la fecha, en el rango de (0-31).
 	Sintaxis: SELECT DAYOFMONTH(fecha[AAAA-MM-DD])
 	EJEMPLO:
 	select dayofmonth('2020-03-25');
 
-DAYOFWEEK():Devuelve el índice del día de la semana para la fecha.En ingles (1=domingo,2=lunes, ...,7=sábado).Estos Valores de índice corresponden al estándar ODBC.
+17.-DAYOFWEEK():Devuelve el índice del día de la semana para la fecha.En ingles (1=domingo,2=lunes, ...,7=sábado).Estos Valores de índice corresponden al estándar ODBC.
 	Sintaxis: SELECT DAYOFWEEK(fecha[AAAA-MM-DD])
 	EJEMPLO:
 	select dayofweek('2020-03-25');
 
-DAYOFYEAR():devuelve el díe del año (1-366).
+18.-DAYOFYEAR():devuelve el díe del año (1-366).
 	Sintaxis: SELECT DAYOFYEAR(fecha[AAAA-MM-DD])
 	EJEMPLO:
 	select dayofyear('2020-03-25');
 
-MAKEDATE():Crear una fecha del año y día del año.
+19.-MAKEDATE():Crear una fecha del año y día del año.
 	Sintaxis:SELECT MAKEDATE(año[AAAA],días)
 	EJEMPLO:
 	select makedate(2020,10);
 	select makedate(2020,55);
 	select makedate(2020,83);
 
-MAKETIME():Crea una hora(tiempo) desde hora, minuto, segundo.
+20.-MAKETIME():Crea una hora(tiempo) desde hora, minuto, segundo.
 	Sintaxis:SELECT MAKETIME(horas[##],minutos[##],segundos[##]);
 	EJEMPLO:
 	select maketime(12,25,38);
 	select maketime(18,40,05);
 
-MICROSECOND():Devuelve los microsegundos del argumento
+21.-MICROSECOND():Devuelve los microsegundos del argumento
 	Sintaxis: SELECT MICROSECOND('expresion[AAAA-MM-DD HH:MM:SS.ccc]');
 	EJEMPLO:
 	select microsecond('12:05:00.28743');Solo trae los microsegundos
 	select microsecond('18:10:02.12');
 
-MINUTE():Devuelve el minuto del argumento.
+22.-MINUTE():Devuelve el minuto del argumento.
 	Sintaxis: SELECT MINUTE('expresion[AAAA-MM-DD HH:MM:SS.ccc]');
 	EJEMPLO:
 	select minute('2020-05-12 10:05:03');Devuelve los minutos
 
-MONTH():Devuelve el mes desde la fecha argumento
+23.-MONTH():Devuelve el mes desde la fecha argumento
 	Sintaxis: SELECT MONTH('fecha[AAAA-MM-DD]');
 	EJEMPLO:
 	select month('2020-04-29');Muestra el mes 4
 
-MONTHNAME():Devuelve el nombre del mes del argumento.
+24.-MONTHNAME():Devuelve el nombre del mes del argumento.
 	Sintaxis:SELECT MONTHNAME('fecha[AAAA-MM-DD]');
 	EJEMPLO:
 	select monthname('2020-04-25');Mostrara como resultado April
 	select monthname('2020-07-10');
 
-NOW():Devuelve la fecha y hora actuales.
+25.-NOW():Devuelve la fecha y hora actuales.
 	Sintaxis1:SELECT NOW();
 	Sintaxis2:SELECT NOW()+0;
 	EJEMPLO:
 	select now();
 	select now() + 0;
 
-PERIOD_ADD():Agrega 'n' meses a un periodo (en el formato AAMM 0 AAAAMM).Devuelve un valor en el formato AAAAMM
+26.-PERIOD_ADD():Agrega 'n' meses a un periodo (en el formato AAMM 0 AAAAMM).Devuelve un valor en el formato AAAAMM
 	Sintaxis:SELECT PERIOD_ADD(periodo[AAAAMM],meses[##])
 	EJEMPLO:
 	select period_add(202004,5);
 	select period_add(202004,20);
 
-PERIOD_DIFF():Devuelve la diferencia entre 2 periodos, especificados cada uno como AAAAMM.
+27.-PERIOD_DIFF():Devuelve la diferencia entre 2 periodos, especificados cada uno como AAAAMM.
 	Sintaxis:SELECT PERIOD_DIFF(periodo-inicial[AAAAMM],periodo-final[AAAAMM])
 	EJEMPLO:
 	select period_diff(202012,202004);
 
-QUARTER():Devuelve el trimestre de un argumento de fecha
+28.-QUARTER():Devuelve el trimestre de un argumento de fecha
 	Sintaxis:SELECT QUARTER('fecha[AAAA-MM-DD]');
 	EJEMPLO:
 	select quarter('2020-04-01');Muestra el trimestre que corresponde al año
 	select quarter('2020-12-01');
 
-SEC_TO_TIME():Convierte segundos a formato 'hh:mm:ss'. Devuelve el argumento segundos, convertidos a horas, minutos y segundos, como un valor tiempo. El tango del resultado está limitado al del tipo de datos TIME.Se produce una advertencia si el argumento corresponde a un valor fuera de ese rango.
+29.-SEC_TO_TIME():Convierte segundos a formato 'hh:mm:ss'. Devuelve el argumento segundos, convertidos a horas, minutos y segundos, como un valor tiempo. El tango del resultado está limitado al del tipo de datos TIME.Se produce una advertencia si el argumento corresponde a un valor fuera de ese rango.
 	Sintaxis:SELECT SEC_TO_TIME(segundo[###]);
 	EJEMPLO:
 	select sec_to_time(360);
 	select sec_to_time(360) + 0;
 
-SECOND():Devuelve el segundo(0-59) pra el argumento, en el rango de 0 a 59.
+30.-SECOND():Devuelve el segundo(0-59) pra el argumento, en el rango de 0 a 59.
 	Sintaxis:SELECT SECOND(hora[HH:MM:SS])
 	EJEMPLO:
 	select second('10:28:03');Devuelve solo los segundos
 
-STR_TO_DATE():Convierte una cadena en una fecha.Esta es la inversa de la función DATE_FORMAT().Recibe como parametros una "cadena" y un "formato".STR_TO_DATE() devuelve un valor DATETIME si el "formato" contiene partes de fecha y hora,o un valor DATE u TIME si la "cadena" contiene solo partes de fecha u hora. Si el valor de fecha, hora o fecha y hora extraído de "cadena" es legal, STR_TO_DATE() devuelve NULL y genra una advertencia.
+31.-STR_TO_DATE():Convierte una cadena en una fecha.Esta es la inversa de la función DATE_FORMAT().Recibe como parametros una "cadena" y un "formato".STR_TO_DATE() devuelve un valor DATETIME si el "formato" contiene partes de fecha y hora,o un valor DATE u TIME si la "cadena" contiene solo partes de fecha u hora. Si el valor de fecha, hora o fecha y hora extraído de "cadena" es legal, STR_TO_DATE() devuelve NULL y genra una advertencia.
 	Sintaxis:SELECT STR_TO_DATE('cadena','formato');
 	EJEMPLO:
 	select str_to_date('1,5,20','%d,%m,%Y');
 	select str_to_date('May 1,2020','%M,%d,%Y');
 
-SUBDATE():Sinónimo de DATE_SUB() cuando se invoca con la forma INTERVAL del segundo argumento.
+32.-SUBDATE():Sinónimo de DATE_SUB() cuando se invoca con la forma INTERVAL del segundo argumento.
 	Sintaxis:SELECT SUBDATE('fecha'[AAAA-MM-DD],INTERVAL expresion[# # #] formato[DAY, WEEK, MONTH,YEAR]);
 	EJEMPLO:
 	select subdate('2020-05-01',INTERVAL 31 DAY);
 
-SUBTIME():Restar tiempos.Devuelve expresion1 - expresion2 expresado como un valor en el mismo formato que expresión1. Expresión1 es una expresión de hora o fecha y hora, y expre2 es una expresión de hora.
+33.-SUBTIME():Restar tiempos.Devuelve expresion1 - expresion2 expresado como un valor en el mismo formato que expresión1. Expresión1 es una expresión de hora o fecha y hora, y expre2 es una expresión de hora.
 	Sintaxis:SELECT SUBTIME(expresion1[AAAA-MM-DD HH:MM:SS.ccc],expresión2[HH:MM:SS.ccc])
 	EJEMPLO:
 	select subtime('02:35:00','01:15:00');Devuelve 1:20 la resta
 
-SYSDATE():Devuelve la hora a la que se ejecuta la funcion.Devuelve la fecha y hora actuales, como un valor en formati 'AAAA-MM-DD hh:mm:ss' o AAAAMMDDhhmmss, dependiendo de si la función se utiliza en cadena o contexto numérico.
+34.-SYSDATE():Devuelve la hora a la que se ejecuta la funcion.Devuelve la fecha y hora actuales, como un valor en formati 'AAAA-MM-DD hh:mm:ss' o AAAAMMDDhhmmss, dependiendo de si la función se utiliza en cadena o contexto numérico.
 
 Devuelve la hora a la que se ejecuta. Esto difiere del comportamiento de NOW(), que devuelve un tiempo constante que indica el momento en que la declaración comenzó a ejecutarse.(Dentro de una función almacenafda o desencadenante, NOW() devuelve el momento en que la función o la declaración desencadenante comenzó a ejecutarse)
 
@@ -1001,3 +1001,151 @@ Devuelve la hora a la que se ejecuta. Esto difiere del comportamiento de NOW(), 
 	Sintaxis2: SELECT SYSDATE() + 0;
 	EJEMPLO:
 	select sysdate(),sleep(2),sydate();
+
+35.-TIME():Extrae la porción de tiempo de la expresión pasada.Extrae la parte de tiempo de la expresión de hora o expresión de fecha y hora y la devuelve como una cadena. Si utiliza la sintaxis 2, se devuelve como un número.
+	Sintaxis1: SELECT TIME(fecha_hora[AAAA-MM-DD HH:MM:SS.ccc]);
+	Sintaxis2: SELECT TIME(fecha_hora) + 0;
+	EJEMPLO:
+	select time('2020-04-26 12:45:03');
+	select time('2020-04-26 12:45:03') + 0;
+
+36.-TIME_FORMAT():Formato como Hora.Se usa como la función DATE_FORMAT(),pero el "formato" puede contener especificaciones de formato solo para horas, minutos, segundos y microsegundos. Otros especificadores producen un valor NULO o 0.
+
+	Sintaxis:SELECT TIME_FORMAT('expresion','formato');
+
+	Formatos validos son los siguientes:
+	%f Microsegundos (000000..999999)
+	%H Horas (00..23)
+	$h Horas (01..12)
+	%I Horas (01..12)
+	%i Minutos, numerico (00..59)
+	%s Segundos
+	%S Segundos
+	EJEMPLO:
+	select time_format('8:10:38','%h');
+	select time_format('8:10:38','%h %i');
+	select time_format('8:10:38','%h %i %s');
+
+37.-TIME_TO_SEC():Devuelve el argumento de tiempo, convertido a segundos.
+	Sintaxis:SELECT TIME_TO_SEC('tiempo[HH:MM:SS]');
+	EJEMPLO:
+	select time_to_sec('1:0:00');Muestra la cantidad se segundos que tiene una hora
+	select time_to_sec('2:45:10');
+
+38.-TIMEDIFF():Restar tiempo.Devuelve expresion1 - expresion2 expresado como un valor de tiempo. expresion1 y expresion2 son expresiones de hora o fecha y hora, pero ambas deben ser del mismo tipo.
+	Sintaxis:SELECT TIMEDIFF(expresion1[AAAA-MM-DD HH:MM:SS.ccc],expresion2[AAAA-MM-DD HH:MM:SS.ccc])
+	EJEMPLO:
+	select timediff('2020-05-01 01:05:28','2020-04-30 23:50:10');Muestra la diferencia en hora en este caso es 1:15:18
+
+39.-TIMESTAMP():Devuelve la expresión de fecha o fecha y hora.Con un único argumento, esta función devuelve la expresión date o datetime como un valor datetime. Con dos argumentos, agrega la expresión de tiempo expresion2 a la expresion fecha o fecha y hora y devuelve el resultado como un valor de fecha y hora.
+	Sintaxis1: SELECT TIMESTAMP('fecha_hora[AAAA-MM-DD HH:MM:SS.ccc]');
+	Sintaxis2: SELECT TIMESTAMP('fecha_hora','hora[HH:MM:SS.ccc]');
+	EJEMPLO:
+	select timestamp('2020-04-18');Convierte al formato fecha y hora
+	select timestamp('2020-04-18 14:55:10','00:05:00');Muestra o añade los 5 min y mostrar 15:00:10
+
+40.-TIMESTAMPADD():Agrear un intervalo a una expresión entero a la expresión date o datetime
+	Sintaxis:SELECT TIMESTAMPADD(intervalo[second, minute,hour,Day,week,month,year],cantidad[# # #],fechahora[AAAA-MM-DD HH:MM:SS.ccc]);
+	EJEMPLO:
+	select timestampadd(second,60,'2020-04-25');El resultado sería 2020-04-25 00:01:00
+	select timestampadd(minute,5,'2020-04-25 12:00:00');
+	select timestampadd(week,3,'2020-04-25');
+
+41.-TIMESTAMPDIFF():Resta un intervalo de una expresión de fecha y hora.Devuelve la expresion2 - expresion1, donde ambas expresiones son de tipo fecha o fecha y hora. El resultado se expresa en la unidad de medida espceificada en "Intervalo", como un entero.
+Una expresion puede ser una fecha y la otra una fecha y hora;un valor de fecha, se trarat como una fecha y hora, que tiene la parte de tiempo '00:00:00' cuando sea necesario. La unidad para el resultado(un entero) viene dada por el argumento de la unidad.
+	Sintaxis: SELECT TIMESTAMPDIFF(intervalo[second, minute,hour,Day,week,month,year],expr1[AAAA-MM-DD HH:MM:SS.ccc],expr2[AAAA-MM-DD HH:MM:SS.ccc]);
+	EJEMPLO:
+	select timestampdiff(minute,'2020-05-15 15:35:29','2020-05-01 16:48:30'); muestra la diferencia en el intervalo(minutos)
+	select timestampdiff(month,'2020-05-01','2020-07-12');
+
+42.-TO_DAYS():Devuelve el argumento de fecha convertido a días.Dada una fecha, devuelve un número de día(el numero de dias desde el año 0).Noestá destinado a usarse con valores que preceden al advenimeinto del calendario gregoriano(1582), por que no tiene en cuenta los dias que se perdieron cuando se cambio el calendario.
+	Sintaxis: SELECT TO_DAYS('fecha[AAAA-MM-DD]');
+	EJEMPLO:
+	select to_days('2020-05-15');
+	select to_days('2020-05-17');
+
+43.-TO_SECONDS():Devuelve el argumento de fecha o fecha y hora convertido a segundos desde el año 0.Dada una fecha o fecha y hora expr, devuelve el numero de segundos desde el año 0. Si expr no es una fecha válida o valor de fceha y hora, devuelve NULL.
+	Sintaxis:SELECT TO_SECONDS('fechahora[AAAA-MM-DD HH:MM:SS]');
+	EJEMPLO:
+	select to_seconds('2020-05-20 00:00:00');
+
+44.-UNIX_TIMESTAMP():Devuelve una marca de tiempo Unix.Si se llama UNIX_TIMESTAMP() sin argumento de fecha, devuelve una marca de tiempo Unix que representa los segundos desde '1970-01-01 00:00:00' UTC.
+	Sintaxis: SELECT UNIX_TIMESTAMP('fecha[AAAA-MM-DD HH:MM:SS ó AAAA-MM-DD]');
+	EJEMPLO:
+	select unix_timestamp();
+	select unix_timestamp('2020-05-15');
+	select unix_timestamp('2020-05-15 01:00:00');
+
+45.-UTC_DATE():Devuelve la fecha UTC actual.Devuelve la fecha UTC(meridiano de grenwich) actual como un valor en formato 'AAAA-MM-DD' o AAAAMMDD, dependiendo de si la función se usa en contexto de cadena o numérico
+	Sintaxis1: SELECT UTC_DATE();
+	Sintaxis2: SELECT UTC_DATE() + 0;
+	EJEMPLO:
+	select utc_date();
+	select utc_date() + 0;
+
+46.-UTC_TIME():Devuelve la hora UTC actual.Devuelve el tiempo UTC actual como un valor en formato 'hh:mm:ss' o hhmmss, dependiendo de si la función se utiliza en una cadena o contexto numérico.
+	Sintaxis1: SELECT UTC_TIME();
+	Sintaxis2: SELECT UTC_TIME() + 0;
+	EJEMPLO:
+	select utc_time();
+	select utc_time() + 0;
+
+47.-UTC_TIMESTAMP():Devuelve la fecha y hora UTC actual.Devuelve la fecha y hora UTC actual como un valor en formato 'AAAA-MM-DD hh:mm:ss' o AAAAMMDDhhmmss, dependiendo de si la función se usa en cadena o contexto numerico.
+	Sintaxis1: SELECT UTC_TIMESTAMP();
+	Sintaxis2: SELECT UTC_TIMESTAMP() + 0;
+	EJEMPLO:
+	select utc_timestamp();
+	select utc_timestamp() + 0;
+
+48.-WEEK():Devuelve el número de semana.la forma de dos argumntos de WEEK() le permite especificar si la semana comienza el domingo o el lunes y su el valor de retorno debe de estar en el rango de 0 a 53 o de 1 a 53.Si se omite el argumento de modo,el valor de la variable de sistema default_week_format se utiliza.
+	Sintaxis:SELECT WEEK('fecha[AAAA-MM-DD]',modo[0..7])
+	MODOS:
+	0 Domingo 	0-53 	con un domingo en este año
+	1 Lunes 	0-53	con 4 o mas días en este año
+	2 Domingo 	1-53	con un domingo en este año
+	3 Lunes 	1-53	con 4 o mas días en este año
+	4 Domingo 	0-53	con 4 o mas días en este año
+	5 Lunes 	0-53	con un Lunes en este año
+	6 domingo 	1-53	con 4 o mas días en este año
+	7 Lunes 	1-53	con un Lunes en este año
+	EJEMPLO:
+	select week('2020-02-20');Muestra la seman 7
+	select week('2020-02-20',0);
+	select week('2020-02-20',1);
+
+49.-WEEKDAY():Devuelve el indice del día de la semana para la fecha (0=lunes,1=martes,...6=Domingo)
+	Sintaxis:SELECT WEEKDAY('fecha[AAAA-MM-DD]');
+	EJEMPLO:
+	select weekday('2020-05-15');
+	select weekday('2020-05-18');
+
+50.-WEEKOFYEAR():Devuelve la semana calendario de la fecha(1-53).
+	Sintaxis:SELECT WEEOFYEAR('fecha[AAAA-MM-DD]')
+	EJEMPLO:
+	select weekofyear('2020-01-12');te muestra el numero de la semana
+	select weekofyear('2020-02-12');
+	select weekofyear('2020-03-12');
+
+51.-YEAR():Regresa el año para la fecha, en el rango de 1000 a 9999, o 0 para la fecha "cero"
+	Sintaxis: SELECT YEAR('fecha[AAAA-MM-DD HH:MM:SS]');
+	EJEMPLO:
+	select year('2020-01-12');
+
+52.-YEARWEEK();Regresa el año y la semana.Devuelve año y seman para una fecha. El año en el resultado puede ser diferente del año en el argumento de fecha para la primera y la ultima semana del año.
+	Sintaxis:SELECT YEARWEEK('fecha[AAAA-MM-DD HH:MM:SS]',modo[0..7]);
+	MODO:
+	MODOS:
+	0 Domingo 	0-53 	con un domingo en este año
+	1 Lunes 	0-53	con 4 o mas días en este año
+	2 Domingo 	1-53	con un domingo en este año
+	3 Lunes 	1-53	con 4 o mas días en este año
+	4 Domingo 	0-53	con 4 o mas días en este año
+	5 Lunes 	0-53	con un Lunes en este año
+	6 domingo 	1-53	con 4 o mas días en este año
+	7 Lunes 	1-53	con un Lunes en este año
+	EJEMPLO:
+	select yearweek('2020-01-12');
+	select yearweek('2020-12-31', 0);
+	select yearweek('2020-12-31', 1);
+
+		######################## FUNCIONES PARA ENCRIPTACION Y COMPRESION ########################
