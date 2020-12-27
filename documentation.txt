@@ -1230,46 +1230,61 @@ SHA1() puede considerarse un equivalente criptográfico más seguro de MD5().
 	EJEMPLO:
 	select collation('abc');
 
-5.-CONNECTION_ID():Devuelve el ID de conexión para la conexión
-	Sitaxis:
+5.-CONNECTION_ID():Devuelve el ID de conexión para la conexión.Devuelve laID de conexion (ID de hilo) para la conexión. Cada conexión tiene un ID que es unica entre el conjunto de clientes actualmente conectados.
+	Sitaxis:SELECT CONNECTION_ID();
 	EJEMPLO:
+	select connection_id();
 
-6.-CURRENT_USER():El nomre de usuario autenticado y el nombre de host.
-	Sitaxis:
+6.-CURRENT_USER():El nombre de usuario autenticado y el nombre de host.
+	Sitaxis:SELECT CURRENT_USER();
 	EJEMPLO:
+	select current_user();
 
-7.-DATABASE():Devulve el nombre actual de la Base de Datos.
-	Sitaxis:
+7.-DATABASE():Devulve el nombre actual de la Base de Datos seleccionada.
+	Sitaxis:SELECT DATABASE();
 	EJEMPLO:
+	select database();
 
-8.-FOUND_ROWS():para un select con una clausula LIMIT, el número de filas que se devolverían si no hubiera una cláusula LIMIT.
-	Sitaxis:
+8.-FOUND_ROWS():para un select con una clausula LIMIT, el número de filas que se devolverían si no hubiera una cláusula LIMIT.En una sentencia SELECT con parametro LIMIT, retorna la cantidad de fila que hubiese seleccionado si NO tuviera LIMIT.
+	Sitaxis:SELECT SQL_CALC_FOUND_ROWS * FROM tabla WHERE condición LIMIT #;
+			SELECT FOUND_ROWS();
 	EJEMPLO:
+	select * from productos;
+	SELECT SQL_CALC_FOUND_ROWS * FROM tabla WHERE condición LIMIT #;
+	SELECT FOUND_ROWS();
 
-9.-LAST_INSERT_ID():Valor de la columna AUTOINCREMENT para el ultimo INSERT.
-	Sitaxis:
+9.-LAST_INSERT_ID():Valor de la columna AUTOINCREMENT para el ultimo INSERT.Retorna el numero de ID máximo de la ultima inserción realizada en una tabla sobre un campo con autoincremento.
+	Sitaxis:SELECT LAST_INSERT_ID();
 	EJEMPLO:
+	select last_insert_id();
 
-10.-ROW_COUNT():El numero de filas actualizadas.
-	Sitaxis:
+10.-ROW_COUNT():El numero de filas actualizadas.Retorna el numero de filas actualizadas en la ultima operación de insert, update o delete.
+	Sitaxis:SELECT ROW_COUNT();
 	EJEMPLO:
+	select row_count();
 
-11.-SCHEMA():Sinonimo de BASE DE DATOS().
-	Sitaxis:
+11.-SCHEMA():Sinonimo de BASE DE DATOS().Devuelve el nombre de la BD actualmente seleccionada. Esta funcion es sinónimo de la función DATABASE().
+	Sitaxis:SELECT schema();
 	EJEMPLO:
+	select schema();
 
 12.-SESSION_USER():Sinonimo de USER().
-	Sitaxis:
+	Sitaxis: SELECT SESSION_USER();
 	EJEMPLO:
+	select session_user();
 
-13.-SYSTEM_USER():Sinnimo de USER().
-	Sitaxis:
+13.-SYSTEM_USER():Sinonimo de USER().
+	Sitaxis:SELECT SYSTEM_USER();
 	EJEMPLO:
+	select systema_user();
 
-14.-USER():El nombre de usuario y el nombre de host proporcionado por el cliente.
-	Sitaxis:
+14.-USER():El nombre de usuario y el nombre de host proporcionado por el cliente.Devuelve el nombre de usuario MySQL actual y el nombre de host como una cadena en el juego de caracteres utf8.
+El valor indica el nimbre de usuario que especifico al conectarse al servidor y el host del cliente desde el que se conectó.El valor puede ser diferente del de CURRENT_USER().
+	Sitaxis:SELECT USER();
 	EJEMPLO:
+	select user();
 
-15.-VERSION():Devuelve una cadena que indica la version del servidor MySQL.
-	Sitaxis:
+15.-VERSION():Devuelve una cadena que indica la version del servidor MySQL.Devuelve una cadena que indica la version del servidor MySQL. La cadena usa el juego de caracteres utf8.El valor puede tener un sufijo además del número de versión.
+	Sitaxis:SELECT VERSION();
 	EJEMPLO:
+	select version();
