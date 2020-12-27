@@ -1149,3 +1149,127 @@ Una expresion puede ser una fecha y la otra una fecha y hora;un valor de fecha, 
 	select yearweek('2020-12-31', 1);
 
 		######################## FUNCIONES PARA ENCRIPTACION Y COMPRESION ########################
+
+1.-AES_ENCRYPT():Cifrar usando AES.El cifrado de datos utiliza el algoritmo oficial AES(Advanced Encryption Standard), anteriormente conociso como "Rijndael".El estandar AES permite varias longitudes de clave, Por defecto, esta funcion implementa AES con una longitud de clave de 128 bits.
+
+	Sintaxis:SELECT AES_ENCRYPT(cadena,llave_cadena);
+
+Cifra la "cadena"(parametro1) utilizando la cadena de clave "Llave_cadena" (parametro2) y devuelve una cadena binaria que contiene la salida cifrada.Si cualquiera de los argumentos de la función es NULL,la función devuelve NULL.
+	EJEMPLO:
+	select aes_encrypt();
+
+2.-AES_DECRYPT():Descifrar usando AES.Descifra la "cadena"(parametro1) utilizando la cadena de clave "llave_cadena"(parametro2) y devuelve una cadena que contiene el texto original sin cifrar (descifrado). Si cualquiera de los argumentos de la función es NULL, la función devuelve NULL.
+	Sintaxis:SELECT AES_DECRYPT(cadena,llave_cadena);
+
+3.-COMPRESS():Devuelve el resultado como una cadena binaria
+	Ejemplo:
+	update cifrado set cadena_cifrada = compress(cadena_original)
+
+4.-UNCOMPRESS():descomprimir una cadena antes de compresión
+	Ejemplo:
+	select uncompress(cadena_cifrada) from cifrado
+
+5.-UNCOMPRESSED_LENGTH():Devuelve longitud de cadena antes de compresión.Devuelve la longitud que tenía la cadenacomprimida antes de ser comprimida.
+	Sintaxis:
+	SELECT UNCOMPRESSED_LENGHT(cadena_binaria);
+	EJEMPLO:
+	select uncompressed_lenght(cadena_cifrada) from cifrado;
+
+6.-MD5():Calcular suma de comprobación MD5.Calcula una suma de comprobación MD5 de 128 bits para la cadena. El valor se devuelve como una cadena de 32 digitos hexadecimales, o NULL si el argumento era NULL. El valor de retorno puede, por ejemplo, usarse como una clave hash.
+
+	Sintaxis: SELECT MD5(cadena);
+
+Este es el "Algoritmo de resumen de mensajes MD5 de RSA Data Security, Inc.".
+	EJEMPLO:
+	select md5(cadena_original) from cifrado:
+
+7.-SHA1(),SHA():Calcular una sema de comprobación de 160 bits SHA-1.Calcula una suma de verificación de 160 bits SHA-1 para la cadena, como se describe en RFC3174(algoritmo de hash seguro). El valor se devuelve como una cadena de 40 siitos hexadeciamales o NULL si el argumento era NULL.
+	Sintaxis:SELECT SHA1(cadena);
+SHA1() puede considerarse un equivalente criptográfico más seguro de MD5().
+	EJEMPLO:
+	select sha1(cadena_original) from cifrado;
+
+8.-SHA2():Calcular una suma de comprobación SHA-2.Calcula la familia SHA-2 de funciones (SHA-224, SHA-256, SHA-384 y SHA-512). El primer argumento es la cadena de texto sin formato que se va a dividir. El segundo argumento indica la lingitud de bit deseada del resultado, que debe tener un valor de 224, 256, 384, 512 o 0 (que es equivalente a 256). Si cualquiera de los argumentos es NULL o la longitud del hash no es uno de los valores permitidos, el valor de retorno es NULL. De lo contrario, el resultado de la sunción es un valor hash que contiene el número deseado de bits.
+
+	Sintaxis:SELECT SHA2(cadena,longitud)
+
+	EJEMPLO:
+	select sha2(cadena_original,224);
+	select sha2(cadena_original,256);
+	select sha2(cadena_original,384);
+	select sha2(cadena_original,512);
+
+			######################## FUNCIONES DE INFORMACIÓN ########################
+
+1.-BENCHMARK():Ejecuta repetidamente una expresión.Esta función ejecuta la expresión "expr", la contidad de veces indicada en "contar".Puede usarse paa medr la rapidez con que MySQL procesa la expresión. El valor del resultado es 0 o NULL para argumentos inapropiados, como un recuento de repeticiones NULL o negativo.
+	Sitaxis:SELECT BEnCHMARK(contar,expr)
+	EJEMPLO:
+	select benchmark(1000000,AES_ENCRYP('Hola','Hasta la vista'));
+
+2.-CHARSET():Devuelve el conjunto de caracteres del argumento de cadena.
+	Sitaxis:SELECT CHARSET(cadena);
+	EJEMPLO:
+	select charset('ejemplo de la funcion charset');Arroja Latin1
+	select @cadena = CONVERT('ejemplo de la funcion charset' USING ucs2);
+	select charset(@charset);
+
+3.-COERCIBILITY():Devuelve el valor de coercibilidad de cotejo del argumento de cadena.Los valores de retorno tienen los sognificados que se muestran en la siguiente tabla. los valores más bajos tienen mayor prioridad.
+0-->Cotejo Explicita. Valor con cluausula COLLATE
+1-->Son cotejo. COncatenacion de cadenas con diferente cotejo
+2-->Cotejo implicito. Valor de columna, variable local.
+3-->Constante del sistema. Retorno de la función USER().
+4-->Coercible. Cadena Literal.
+5-->Numérico. Valor númerico o temporal.
+5-->Ignorable. NULL o una expresión derivada de NULL.
+	Sitaxis:SELECT COERCIBILITY(cadena);
+	EJEMPLO:
+	select coercibility('abc' collate LATIN1_BIN);
+
+4.-COLLATION():Devuelve el cotejo del argumento de cadena.
+	Sitaxis:SELECT COLLATION(cadena);
+	EJEMPLO:
+	select collation('abc');
+
+5.-CONNECTION_ID():Devuelve el ID de conexión para la conexión
+	Sitaxis:
+	EJEMPLO:
+
+6.-CURRENT_USER():El nomre de usuario autenticado y el nombre de host.
+	Sitaxis:
+	EJEMPLO:
+
+7.-DATABASE():Devulve el nombre actual de la Base de Datos.
+	Sitaxis:
+	EJEMPLO:
+
+8.-FOUND_ROWS():para un select con una clausula LIMIT, el número de filas que se devolverían si no hubiera una cláusula LIMIT.
+	Sitaxis:
+	EJEMPLO:
+
+9.-LAST_INSERT_ID():Valor de la columna AUTOINCREMENT para el ultimo INSERT.
+	Sitaxis:
+	EJEMPLO:
+
+10.-ROW_COUNT():El numero de filas actualizadas.
+	Sitaxis:
+	EJEMPLO:
+
+11.-SCHEMA():Sinonimo de BASE DE DATOS().
+	Sitaxis:
+	EJEMPLO:
+
+12.-SESSION_USER():Sinonimo de USER().
+	Sitaxis:
+	EJEMPLO:
+
+13.-SYSTEM_USER():Sinnimo de USER().
+	Sitaxis:
+	EJEMPLO:
+
+14.-USER():El nombre de usuario y el nombre de host proporcionado por el cliente.
+	Sitaxis:
+	EJEMPLO:
+
+15.-VERSION():Devuelve una cadena que indica la version del servidor MySQL.
+	Sitaxis:
+	EJEMPLO:
