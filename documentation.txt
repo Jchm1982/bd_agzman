@@ -1288,3 +1288,105 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 	Sitaxis:SELECT VERSION();
 	EJEMPLO:
 	select version();
+
+####################### DECLARACIONES DE DEFINICION DE DATOS ##########################
+
+1.-ALTER:
+	-ALTER DATABASE
+		ALTER { DATABSE | SCHEMA }[nombre_bd] especificacion
+		especificacion:
+		[DEFAULT] CHARACTER SET[=] nombre_charset | [DEFAULT] COLLATE[=]nombre_colacion | DEFAULT ENCRYPTION[=]{ 'Y' | 'N'}
+		Ejemplo:
+		show create database clientes;
+		ALTER TABLE clientes CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+		SHOW CREATE DATABASE clientes;
+
+	-ALTER EVENT
+		ALTER
+			[DEFINER = usuario]
+			EVENT nombre_evento
+			[ON SCHEDULE calendario]
+			[ON COMPLETION[NOT] RESERVE]
+			[RENAME TO nuevo_nombre_evento]
+			[ENABLE | DISABLE | DISABLE ON SLAVE]
+			[COMMENT 'cadena']
+			[DO cuerpo_evento]
+		Ejemplo:
+			CREATE EVENT actualizar_costos
+				ON SCHEDULE
+				EVERY 1 minute
+				COMMENT 'Actualizacion automatica de Costos'
+				DO
+				UPDATE clientes.productos SET costo = costo+5;
+				SHOW WARNINGS;
+				SET GLOBAL event_schedule=ON;
+
+
+	-ALTER FUNCTION
+		ALTER FUNCTION func_name[caracteristicas]
+			caracteristicas:
+			COMMENT 'cadena'
+			| LANGUAGE SQL
+			| {CONTAINS SQL | NO SQL | READS SQL DATA | MODIEFIES SQL DATA }
+			|SQL SECURITY {DEFINER | ONVOKER}
+		Ejemplo:
+		DELIMITER//
+		CREATE FUNCTION altura_precio(vprecio_venta int)
+		 RETURN VARCHAR(20) COMMENT 'Funcion de prueba'
+		BEGIN
+		  RETURN 'Demostracion';
+		 END //
+
+		 DELIMITER;
+		 SHOW FUNCTION STATUS;
+		 ALTER FUNCTION altura_precio COMMENT 'Calculo  de altura de precio';
+		 SHOW FUNCTION STATUS;
+		 DROP FUNCTION altura_precio;
+
+	-ALTER INSTANCE
+
+
+	-ALTER LOGFILE GROUP
+
+
+	-ALTER PROCEDURE
+
+
+	-ALTER SERVER
+
+
+	-ALTER TABLE
+	-ALTER TABLESPACE
+	-AÑTER VIEW
+2.-CREATE:
+	-CREATE DATABASE
+	-CREATE EVENT
+	-CREATE FUNCTION
+	-CREATE INDEX
+	-CREATE LOGFILE GROUP
+	-CREATE PROCEDURE y CREATE FUNCTION
+	-CREATE SERVER
+	-CREATE SPATIAL REFERENCE SYSTEM
+	-CREATE TABLE
+	-CREATE TALESPACE
+	-CREATE TRIGGER
+	-CREATE VIEW
+3.-DROP:
+	-DROP DATABSE
+	-DROP EVENT
+	-DROP FUNCTION
+	-DROP INDEX
+	-DROP LOGFILE GROUP
+	-DROP PROCEDURE y DROP FUNCTION
+	-DROP SERVER
+	-DROP SPATIAL REFERENCE SYSTEM
+	-DROP TABLE
+	-DROP TABLESPACE
+	-DROP TRIGGER
+	-DROP VIEW
+
+4.-RENAME:
+	-RENAME TABLE:
+
+5.-TRUCATE:
+	-TRUNCATE TABLE:
