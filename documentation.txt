@@ -1344,20 +1344,69 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 		 DROP FUNCTION altura_precio;
 
 	-ALTER INSTANCE
+		ALTER INSTANCE acciones
 
+		acciones:{
+			ROTATE INNODB MASTER KEY
+			| ROTATE BINLOG MASTER KEY
+			| RELOAD TLS [NO ROLL BACK ON ERROR]
+		}
+		ALTER INSTANCE ROTATR BINLOG MASTER KEY->GIRA LA CLAVE MAESTRA DE REGISTRO BINARIO
+		ALTER INSTANCE RELOAD TLS->RECONFIGURA EL TEXTO SSL A PARTIR DE LOS VALORES ACTUALES DE LAS VARIABLES DEL SISTEMA
 
 	-ALTER LOGFILE GROUP
+		ALTER LOGFILE GROUP archivolog_grupo
+		ADD UNDOLIFE 'nombre_archivo'
+		[INITIAL_SIZE[=]tamaño]
+		[WAIT]
+		ENGINE[=]nombre_maquina
+
+			ALTER LOGFILE GROUP grupo_1
+			ADD UNDOFILE'undo_10.dat'
+			INITIAL_SIZE=32M
+			ENGINE=InnoDB;
+
+			show warnings;
 
 
 	-ALTER PROCEDURE
+		ALTER PROCEDURE porc_name[caracteristicas...]
+
+		caratcteristicas:
+			COMMENT'cadena'
+			| LANGUAGE SQL
+			| {CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA}
+			| SQL SECURITY {DEFINER | INVOKER}
+
+		DELIMITER //
+
+		CREATE PRCEDURE contar_productos(IN vnumerodoc INT,OUT vcuantos INT)
+		COMMENT 'procedimiento de prueba'
+		BEGIN
+			SELECT COUNT(*)INTO vcuantos FROM det_factura
+			WHERE num_factura = vnumerodoc;
+		END//
+
+		DELIMITER;
+
+		SHOW PROCEDURE STATUS like 'CONTAR%';
+
+		ALTER PROCEDURE contar_productos COMMENT 'Cuenta la cantidad de productos en un documento';
+		SHOW PROCEDURES STATUS like 'CONTAR%';
 
 
 	-ALTER SERVER
 
 
 	-ALTER TABLE
+
+
 	-ALTER TABLESPACE
-	-AÑTER VIEW
+
+
+	-ALTER VIEW
+
+
 2.-CREATE:
 	-CREATE DATABASE
 	-CREATE EVENT
