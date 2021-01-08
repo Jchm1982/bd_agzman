@@ -1395,16 +1395,31 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 		SHOW PROCEDURES STATUS like 'CONTAR%';
 
 
-	-ALTER SERVER
+	-ALTER SERVER ?
 
 
-	-ALTER TABLE
+	-ALTER: Permite actulizar la esructura de una tabla.Agregar o eliminar columnas, crear o destruir indices,cambiar el tipo de columna
+		ALTER TABLE nombre_tabla [especificaciones_alter[,especificaciones_alter]...][opcones_particion]
+		*ver video cap 49 minuto 7:12
 
 
-	-ALTER TABLESPACE
+	-ALTER TABLESPACE ? Ver Video
 
 
-	-ALTER VIEW
+	-ALTER VIEW: Cambia la definicion de una vista que debe de existir.
+		ALTER
+		[ALGORITHM={UNDEFINE|MERGE|TEMPTABLE}]
+		[DEFINER=usuario]
+		[SQL SECURITY{DEFINER|INVOKER}]
+		VIEW nombre_vista[(lista_columnas)]
+		AS instruccion_select
+		[WITH[CASCADED|LOCAL]CHECK OPTION]
+
+		EJEMPLO:
+			CREATE VIEW vista_ventas(id,nombre,documento,fecha) AS
+			SELECT a.num_cliente,a.nombre,b.num_factura,b.fecha_factura FROM cliente a, factura b WHERE a.num_cliente = b.num_cliente;
+
+			SELECT * FROM vista_ventas;
 
 
 2.-CREATE:
@@ -1439,4 +1454,3 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 
 5.-TRUCATE:
 	-TRUNCATE TABLE:
-	hola 1
