@@ -1439,3 +1439,4 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 
 5.-TRUCATE:
 	-TRUNCATE TABLE:
+	hola 1
