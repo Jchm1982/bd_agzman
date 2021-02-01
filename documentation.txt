@@ -1538,6 +1538,67 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 5.-TRUCATE:
 	-TRUNCATE TABLE:
 
+
+############################### DECLARACIONES DE MANIPULACION DE DATOS #####################################
+1.-CALL:Invoca un procedimiento almacenado que se definio previamente con CREATE PROCEDURE.
+2.-DELETE
+3.-DO
+4.-HANDLER:Proporciona un accesos directo alas interfaces del motor de almacenamiento de tablas
+5.-IMPORT TABLE
+6.-INSERT
+7.-LOAD DATA:Permite leer las filas de un arhcivo de texto en una tabla a una velocidad muy rápida
+9.-LOAD XML:Lee los datos de un archivo XML y lox coloca en una tabla
+10.-REPLACE
+11.-SELECT
+12.-TABLE
+13.-UPDATE
+14.-VALUES
+
+############################### SINTAXIS DE DECLARACION COMPUESTA #####################################
+
+1.-INSTRUCCION BEGIN ... END Compuesta, Se usa para escribir declaraciones compuestas que pueden aparacer dentro de programas almacenados, Una declaracion compuesta puede tener varias declaraciones.
+	SINTAXIS:
+	[etiqueta_begin:]BEGIN
+		[lista_de_instrucciones]
+	END[etiqueta_fin]
+
+
+2.-Etiqueta de delaracion
+3.-Instruccion DECLARE
+4.-INSTRUCCIONES DE CONTROL DE FLUJO:
+	CASE:
+		SINTAXIS:
+			CASE valor_case
+				WHEN cuando_valor THEN lista_de_instrucciones
+				[WHEN cuando_valor THEN lista_de_instrucciones]...
+				[ELSE lista_de_instrucciones]
+			END CASE
+
+			CASE
+				WHEN condicion_busqueda THEN lista_de_instrucciones
+				[WHEN condicion_busqueda THEN lista_de_instrucciones]...
+				[ELSE lista_de_instrucciones]
+			EN CASE
+
+	IF:
+		SINTAXIS:
+		IF condicion_busqueda THEN lista_de_instrucciones
+			[ELSEIF condicion_busqueda THEN lista_de_instrucciones]...
+			[ELSE lista_de_instrucciones]
+		END IF
+	ITERATE:
+	LEAVE:
+	LOOP:
+	REPEAT:
+	RETURN:
+	WHILE:
+5.-CURSORES
+6.-MANEJO DE CONDICIONES
+7.-RESTRICCIONES EN EL MANEJO DE CONDICIONES
+>>>>>>> 5cdf4a81f19712b6be1d312ddda516e8c1b732e8
+
+
+
 <<<<<<< HEAD
 *********************** CLAUSULA GROUP BY ***********************
 
@@ -1621,61 +1682,3 @@ WHERE Prod_ProdId=1 AND Ventas_Fecha BETWEEN '2018-01-01' AND '2018-02-14'
 GROUP BY Prod_Id
 HAVING Unidades > 20
 ORDER BY Unidades DESC
-=======
-############################### DECLARACIONES DE MANIPULACION DE DATOS #####################################
-1.-CALL:Invoca un procedimiento almacenado que se definio previamente con CREATE PROCEDURE.
-2.-DELETE
-3.-DO
-4.-HANDLER:Proporciona un accesos directo alas interfaces del motor de almacenamiento de tablas
-5.-IMPORT TABLE
-6.-INSERT
-7.-LOAD DATA:Permite leer las filas de un arhcivo de texto en una tabla a una velocidad muy rápida
-9.-LOAD XML:Lee los datos de un archivo XML y lox coloca en una tabla
-10.-REPLACE
-11.-SELECT
-12.-TABLE
-13.-UPDATE
-14.-VALUES
-
-############################### SINTAXIS DE DECLARACION COMPUESTA #####################################
-
-1.-INSTRUCCION BEGIN ... END Compuesta, Se usa para escribir declaraciones compuestas que pueden aparacer dentro de programas almacenados, Una declaracion compuesta puede tener varias declaraciones.
-	SINTAXIS:
-	[etiqueta_begin:]BEGIN
-		[lista_de_instrucciones]
-	END[etiqueta_fin]
-
-
-2.-Etiqueta de delaracion
-3.-Instruccion DECLARE
-4.-INSTRUCCIONES DE CONTROL DE FLUJO:
-	CASE:
-		SINTAXIS:
-			CASE valor_case
-				WHEN cuando_valor THEN lista_de_instrucciones
-				[WHEN cuando_valor THEN lista_de_instrucciones]...
-				[ELSE lista_de_instrucciones]
-			END CASE
-
-			CASE
-				WHEN condicion_busqueda THEN lista_de_instrucciones
-				[WHEN condicion_busqueda THEN lista_de_instrucciones]...
-				[ELSE lista_de_instrucciones]
-			EN CASE
-
-	IF:
-		SINTAXIS:
-		IF condicion_busqueda THEN lista_de_instrucciones
-			[ELSEIF condicion_busqueda THEN lista_de_instrucciones]...
-			[ELSE lista_de_instrucciones]
-		END IF
-	ITERATE:
-	LEAVE:
-	LOOP:
-	REPEAT:
-	RETURN:
-	WHILE:
-5.-CURSORES
-6.-MANEJO DE CONDICIONES
-7.-RESTRICCIONES EN EL MANEJO DE CONDICIONES
->>>>>>> 5cdf4a81f19712b6be1d312ddda516e8c1b732e8
