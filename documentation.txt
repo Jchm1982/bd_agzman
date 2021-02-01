@@ -73,7 +73,7 @@ DROP TABLE 'nombre de la tabla';
 
 	DOUBLE PRECISION-> SINONIMO DE DOUBLE
 
-====TIPOS DE DATOS FECHA Y HORA
+============TIPOS DE DATOS FECHA Y HORA===========
 	DATE->Fecha con formato "YYYY-MM-DD". 3 bytes
 
 	DATETIME->[(precisión)] Fecha y Horacon formato "YYYY-MM-DD HH:MM:SS.SSSSSS". El parametro precisión en la parte decimal de los segundos.5 bytes
@@ -84,7 +84,7 @@ DROP TABLE 'nombre de la tabla';
 
 	YEAR->Representa el año con formato de cuatro digitos "YYYY" o dos digitos "YY". 1 byte
 
-====TIPOS DE DATOS CADENA DE CARACTERES
+===========TIPOS DE DATOS CADENA DE CARACTERES===========
 	CHAR->[(longitud)]
 		-Admite caracteres alfanumericos.
 		-Longitud de 1 - 255 caracteres (por defecto 1)
@@ -108,7 +108,7 @@ DROP TABLE 'nombre de la tabla';
 		-Cadenas de longitud variable
 		-Hasta 4,294,967,295 carácteres (4Gb)
 
-====TIPOS DE DATOS BINARIOS
+===========TIPOS DE DATOS BINARIOS===========
 	BLOB->
 		-Objeto Binario que puede almacenar culquiertipo de información. Admite hasta 65,535 caracteres.64Kb
 
@@ -124,12 +124,14 @@ DROP TABLE 'nombre de la tabla';
 		-Es similar al BLOB
 		-Hasta 4Gb
 
+
 ***************** MOSTRAR BD CON VARIANTES CREACION DE BD*****************
 show databases like 'cli%';
 
 CREATE database IF NOT EXISTS clientes CHARACTER SET=latin2;(No puede crear la BD por que ya existe)
 SHOW WARNINGS;(Muestra Level, Code, Y el mensaje)
 SHOW CREATE DATABASE clientes;(Para mostrar cual fue la sintaxis que se uso para la creación de la BD)
+
 
 ***************** MOSTRAR TABLA CON VARIANTES, CREACION DE TABLAS*****************
 
@@ -190,6 +192,7 @@ CREATE TABLE IF NOT EXISTS productos
     KEY (descripcion) COMMENT 'indice de busqueda por descripcion del producto'
     );
 
+
  **************** COMO VISUALIZAR EL ESQUEMA DE LA BD *************
 
  SHOW CREATE { DATABASE | SCHEMA }
@@ -200,7 +203,8 @@ Ejemplo:
 USE clientes;
 SHOW CREATE DATABASE clientes;
 
- ******************************* COMO INSERTAR DATOS EN LA BD ****************************
+
+******************************* COMO INSERTAR DATOS EN LA BD ****************************
 
 INSERT INTO nombre_tabla(donde vas a insertar datos)
 		(columna_1, columna_2,...columna_n)
@@ -223,7 +227,8 @@ INSERT INTO productos (cod_producto,descripcion,precio_venta)
 INSERT INTO det_factura (num_factura,cod_producto,cant_vendida,valor_unitario)
 	VALUES(2543,774878344,1,10000);
 
- ******************************* SENTENCIA SELECT EN MySQL ****************************
+
+******************************* SENTENCIA SELECT EN MySQL ****************************
 
 SELECT [* | ALL | col1,col2,... coln]
 	[INTO 'archivo_salida']
@@ -243,6 +248,7 @@ SELECT [* | ALL | col1,col2,... coln]
 		-SELECT sum(valor_total)
 		-SELECT count(*)
 		-SELECT min(precio_venta)
+
 
 ******************************* ACTUALIZAR DATOS DE UNA TABLA ****************************
 
@@ -271,7 +277,8 @@ EJEMPLO
 1)
 DELETE FROM cliente WHERE num_cliente = 20;
 
-  ******************************* CONSULTA DE DATOS NO EXACTO DE UNA TABLA ****************************
+
+******************************* CONSULTA DE DATOS NO EXACTO DE UNA TABLA ****************************
 
 SELECT cod_producto,descripcion,precio_venta FROM productos
 WHERE cod_producto = 775627384;
@@ -284,7 +291,13 @@ WHERE cod_producto NOT LIKE "%Videojuegos%";
 
 SELECT * FROM productos WHERE cod_producto NOT LIKE "M%";
 
-  ******************************* FUNCIONES DE COMPARACION Y OPERADORES ****************************
+******************************* UNION DE TABLAS CON WHERE ****************************
+
+EJEMPLO:
+SELET ventas_Fecha AS 'Fecha',Ventas_NroFactura AS 'Nro. Factura',Ventas_CliID as 'ID Cliente',Cli_RazonSocial AS 'Razon Social',Ventas_Total AS 'Total' FROM ventas as v,clientes AS c WHERE v.Ventas_CliId=Cli_Id
+
+
+******************************* FUNCIONES DE COMPARACION Y OPERADORES ****************************
 
 BETWEEN ... AND
 	Sintaxis -> expresión BETWEEN minimo AND máximo
@@ -381,7 +394,7 @@ Ejemplos:
 	SELECT 1 XOR NULL; 	-> NULL
 	SELECT 1 XOR 1 XOR 1; 	-> 1
 
-			******************************* FUNCIONES DE CONTROL DE FLUJO ****************************
+******************************* FUNCIONES DE CONTROL DE FLUJO ****************************
 
 CASE:Se basa en la evaluación de una expresion y cada valor posible se puede especificar en una clausula WHEN de forma independiente.Else puede eliminarse.
 	CASE expresion
@@ -1423,8 +1436,31 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 
 
 2.-CREATE:
-	-CREATE DATABASE
-	-CREATE EVENT
+	-CREATE DATABASE:Crea una base de datos que especifiques.
+		Sintaxis:
+			CREATE {DATABASE|SCHEMA} [IF NOT EXISTS] nombre_bd
+			[especificacion_creación]...
+			especificacion_creación
+			[DEFAULT] CHRACTER SET[=] nombre_charset
+			| [DEFAULT] COLLATE[=]nombre_colcacion
+			| DEFAULT ENCRYPTION[=]{'Y' | 'N'}
+		EJEMPLO:
+		CREATE DATABASE IF NO EXISTS mi_database CHARACTER SET = latin1;
+		SHOW DATABASES;
+
+	-CREATE EVENT:Permite crear y programar un nuevo evento, el evento no se ejecutara ya que debe de estar habilitado el programador de eventos.
+		Sintaxis:
+			CREATE
+				[DEFINER =usuario]
+				EVENT
+				[IF NOT EXISTS]
+				nombre_event
+				ON SCHEDULE calendario
+				[ON COMPLETION[NOT]PRESERVE]
+				[ENABLE|DISABLE|DISABLE ON SLAVE]
+				[COMMENT 'cadena']
+				DO cuerpo_del_evento;
+		EJEMPLO:
 	-CREATE FUNCTION
 	-CREATE INDEX
 	-CREATE LOGFILE GROUP
@@ -1454,3 +1490,86 @@ El valor indica el nimbre de usuario que especifico al conectarse al servidor y 
 
 5.-TRUCATE:
 	-TRUNCATE TABLE:
+
+*********************** CLAUSULA GROUP BY ***********************
+
+EJEMPLOS:
+1.-SELECT Ventas_Fecha,sum(Ventas_Total) AS 'Total' FROM Ventas GROUP BY Ventas_Fecha (Aqui se suman las fechas de cada dia)
+2.-SELECT year(Ventas_Fecha) AS Año,Month(Ventas_Fecha) AS Mes,Day(Ventas_Fecha) AS Dia,sum(Centas_total) AS Total FROM Ventas GROUP BY Año,Mes,Dia
+
+
+*********************** CLAUSULA IN / NOT IN  ***********************
+*SUBCONSULTAS->Solo aceptan una columna ya que traemos una lista de valores
+
+EJEMPLOS:
+1.-SELECT Prod_Id, Prod_Descripcion FROM Productos WHERE Prod_Status IN (1,0)
+2.-SELECT Prod_Id, Prod_Descricpion FROM Productos WHERE Prod_Id NOT IN (SELECT DISTINCT(VD_Prod_Id) FROM Ventas_Detalle)
+
+*********************** CLAUSULA LIKE  ***********************
+
+EJEMPLO:
+SELECT Prod_Id,Prod_Descripcion, Prod:color FROM Productos WHERE CONCAT(Prod_Descripcion, Prod_Color) LIKE '%AD%'
+
+*********************** CLAUSULA JOIN(INNER JOIN)  ***********************
+Es importante llevar un orde de los JOIN ya ue se ejecutan en cascada.No se pueden intercalar datos
+
+EJEMPLO:
+SELECT Ventas_Fecha,Ventas_NroFactura,Ventas_CliID,Cli_RazonSocial,VD_ProdId,Prod_Descripcion,Prod_ProdId,Prov_Nombre,VD_Cantidad,CD_Precio,(VD_Cantidad * VD_Precios) AS 'Parcial' FROM Ventas
+	JOIN Ventas_Detalle ON VD_VentasID=Ventas_Id
+	JOIN Productos ON VD_ProdId=Prod_Id
+	JOIN Proveedores ON Prod_ProvId=Prov_Id
+	JOIN Clientes ON VD_ProdId=Prod_Id
+
+*********************** CLAUSULA LEFT JOIN  ***********************
+
+EJEMPLO:
+SELECT * FROM Alumnos LEFT JOIN Cursos ON Curso_AlumnoID=Alumno=Id
+
+*********************** CLAUSULA RIGHT JOIN  ***********************
+
+EJEMPLO:
+SELECT * FROM Alumnos RIGHT JOIN Cursos ON Curso_AlumnoID=Alumno=Id
+
+*********************** CLAUSULA FULL JOIN  ***********************
+Para utilizarlo deben de ser los mismo campos
+
+SELECT * FROM alumnos LEFT JOIN cursos ON Curso_AlumnoID = Alumno_Id
+UNION
+SELECT * FROM alumnos RIGHT JOIN ON Curso_alumnoID=Alumno_Id
+
+*********************** IF  o CASE ***********************
+EJEMPLOS:
+SELECT Prod_Id,Prod_Descripcion, IF(Prod_Status=1,'Habilitado','Deshabilitado') AS 'Estado' FROM Productos
+
+SELECT Prod_Id,Prod_Descripcion, CASE WHEN(cuando) Prod_Status=1 THEN(entonces) 'Habilitado' ELSE 'Deshabilitado' END AS 'Estado' FROM Peoductos
+
+1.-SELECT Prod_Id,Prod_Descripcion, CASE WHEN(cuando) Prod_Status=1 THEN(entonces) 'Habilitado'
+								 	  WHEN(cuando) Prod_Status=0 THEN(entonces) 'Deshabilitado'
+								 	  WHEN(cuando) Prod_Status=2 THEN(entonces) 'Otro Estado'
+ 									END AS 'Estado' FROM Productos
+
+Ó 2.-SELECT Prod_Id,Prod_Descripcion, CASE Prod_Status
+									  WHEN(cuando) 1 THEN(entonces) 'Habilitado'
+								 	  WHEN(cuando) 0 THEN(entonces) 'Deshabilitado'
+								 	  WHEN(cuando) 2 THEN(entonces) 'Otro Estado'
+ 									END AS 'Estado' FROM Productos
+
+*********************** SUBSTRING ***********************
+SELECT Prod_Id,Prod_Descripcion,SUBSTR(Prod_Descripcion,1,10) AS 'Parte' FROM Productos
+
+1.-SELECT Prod_Id,Prod_Descripcion, CASE SUBSTR(Prod_Descripcion,1,1)
+										 WHEN 'A' THEN 'Letra A'
+										 WHEN 'B' THEN 'Letra B'
+										 END AS 'Ejercicio'
+									FROM Productos
+
+*********************** HAVING ***********************
+EJEMPLO:
+
+SELECT Prod_Id,Prod_Descrpcion,Prod_Color,SUM(VD_Cantidad) AS 'Unidades' FROM productos
+					JOIN ventas_detalle ON Prod_Id=VD_ProdID
+					JOIN ventas ON VD_VentasID = Ventas_ID
+WHERE Prod_ProdId=1 AND Ventas_Fecha BETWEEN '2018-01-01' AND '2018-02-14'
+GROUP BY Prod_Id
+HAVING Unidades > 20
+ORDER BY Unidades DESC
