@@ -1682,3 +1682,37 @@ WHERE Prod_ProdId=1 AND Ventas_Fecha BETWEEN '2018-01-01' AND '2018-02-14'
 GROUP BY Prod_Id
 HAVING Unidades > 20
 ORDER BY Unidades DESC
+
+*********************** INSERT ***********************
+
+EJEMPLOS:
+INSERT INTO Alumnos (Alumno_Nombre)[campos en donde se insertan Valores] VALUES ('Pedro Navaja')[Valores]
+
+*********************** UPDATE ***********************
+EJEMPLOS:
+UPDATE Productos SET Prod_Status = 1 WHERE Prod_Precio > 0
+
+Mas de un Campo:
+UPDATE Productos SET Prod_Status = 1,Prd_CentaSuspendida =1 WHERE Prod_Precio > 0
+
+*********************** SUBCONSULTAS ***********************
+EJEMPLOS:
+SELECT Prod_Id AS 'Articulo',
+	   Prod_descripcion AS 'Descripcion'
+	   (SELECT MAX(Ventas_Fecha) AS Ultfecha FROM Ventas JOIN Ventas_Detalle ON Ventas_ID=VD_VentasID WHERE Prod_Id=1633) AS UltFecha,
+	   (SELECT COUNT(DISTINCT(Ventas_CliID)) AS Cddd FROM Ventas JOIN Ventas_Detalle ON Ventas_ID=VD_VentasID WHERE Prod_Id=1633) AS CantCli
+  FROM Productos
+  WHERE Prod_Id=1633
+
+*********************** ENCRIPTAR DATOS ***********************
+SELECT Prod_Descripcion, AES_ENCRYPT(Prod_Descripcion, 'Master del Desarrollo') AS DescripEnrypt FROM Productos
+
+SELECT Prod_Descripcion, AES_DECRYPT(AES_ENCRYPT(Prod_Descripcion, 'Master del Desarrollo'),'Master del Desarrollo') AS Desencriptado FROM Productos
+
+*********************** LENGTH ***********************
+SELECT Prod_Descripcion, LENGTH(Prod_Descripcion) AS Largo FROM Productos
+
+*********************** COMPRESS ***********************
+SELECT COMPRESS(Prod_Descripcion) AS Comprimido FROM Productos
+
+SELECT UNCOMPRESS(COMPRESS(Prod_Descripcion)) AS Resultado FROM Productos
