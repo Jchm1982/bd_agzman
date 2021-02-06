@@ -1716,3 +1716,23 @@ SELECT Prod_Descripcion, LENGTH(Prod_Descripcion) AS Largo FROM Productos
 SELECT COMPRESS(Prod_Descripcion) AS Comprimido FROM Productos
 
 SELECT UNCOMPRESS(COMPRESS(Prod_Descripcion)) AS Resultado FROM Productos
+
+
+*********************** EXPLAIN (PARA SABER LA OPTIMIZACION DE LAS CONSULTAS)***********************
+
+EXPLAIN SELECT Prod_Id AS ID,Prod_Descripcion AS Descripcion,Ventas_Fecha AS Fecha,SUM(VD_Cantidad*VD_Precio) AS Vendidos
+FROM productos
+	JOIN ventas_detalle ON VD_ProdID = Prod_Id
+	JOIN ventas ON VD_VentasID = Ventas_ID
+WHERE Ventas_Fecha BETWEEN '2018-01-02' AND '2018-01-07'
+GROUP BY ID,Descripcion,Fecha
+ORDER BY Prod_Id
+
+*********************** PROCESSLIST ***********************
+
+La forma de ejecutarlo:
+SHOW processlist
+
+	####### PARA MATAR UN PROCESO  #####
+
+	KILL (id proceso)8
