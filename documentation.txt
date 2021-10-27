@@ -1738,9 +1738,13 @@ SHOW processlist
 	KILL (id proceso)8
 	
 ******************************************************************
-###### 04102021 ######->>>OBTENER EL NOMBRE DE LAS COÑUMNAS DE UNA TABLA
+###### 04102021 ######->>>OBTENER EL NOMBRE DE LAS COLUMNAS DE UNA TABLA
 1.- desc Articulo(nombre de la tabla)
 2.- show columns from Articulo(Nombre de la tabla)
 
 Para saber solo el nombre de la columna:
 select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = 'Articulo'(nombre de la tabla);
+
+******************************************************************
+###### 27102021 ######->>>CONSULTA CON VARIS LIKE
+SELECT * FROM empresa WHERE (razonsocial(campo de busqueda) LIKE '%green%' OR razonsocial(campo de busqeda) LIKE '%rosalva%')
