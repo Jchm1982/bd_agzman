@@ -1748,3 +1748,9 @@ select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME = 'Articulo'
 ******************************************************************
 ###### 27102021 ######->>>CONSULTA CON VARIS LIKE
 SELECT * FROM empresa WHERE (razonsocial(campo de busqueda) LIKE '%green%' OR razonsocial(campo de busqeda) LIKE '%rosalva%')
+
+******************************************************************
+###############   OBTENER DIAS DE UN MES EN ESPECIFICO   ###############
+SELECT DAYOFMONTH(LAST_DAY('2021-03-01')) FROM factura
+SELECT RIGHT( LAST_DAY(  '2003-02-03' ) , 2 ) FROM factura
+SELECT DISTINCT  DAY(LAST_DAY('2010-08-01')) FROM viaje;
