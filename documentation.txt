@@ -1758,3 +1758,11 @@ SELECT DISTINCT  DAY(LAST_DAY('2010-08-01')) FROM viaje;
 ******************************************************************
 ###############   EJEMPLO PARA PODER AGREGAR UN FOLIO CONSECUTIVO A UNA CONSULTA   ###############
 SELECT  DISTINCT (@rownum:=@rownum+1) AS 'fila',/*id_usuario,*/nombre,lcase(Email) AS 'email',empresa FROM (SELECT @rownum:=0) r,usuario WHERE empresa IN (SELECT id_empresa FROM empresa WHERE STATUS = 1 ) AND STATUS = 1 AND email !='' AND empresa NOT IN (37) GROUP BY Email ORDER BY fila,empresa ASC
+
+******************************************************************
+###############   EJEMPLO GROUP CONCAT CON DISTINCT    ###############
+group_concat(DISTINCT factura.id_factura) AS 'Alias de Columna' se lleva acabo con la condicion GORUP BY 
+
+******************************************************************
+###############   EJEMPLO CONTEO CON DISTINCT    ###############
+IF(count(DISTINCT factura.id_factura)>1,sum(factura.subtotal),factura.subtotal) AS 'ASIGNA NOMBRE DE COLUMNA' -> se lleva acabo con la condicion GORUP BY 
