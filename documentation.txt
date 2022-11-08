@@ -1740,7 +1740,7 @@ SHOW processlist
 ******************************************************************
 
 
-###### 04102021 ######->>>OBTENER EL NOMBRE DE LAS COLUMNAS DE UNA TABLA
+###### 04102021 ######->>>OBTENER EL NOMBRE DE LAS COLUMNAS DE UNA TABLA <- <- <- <-
 
 1.- desc Articulo(nombre de la tabla)
 2.- show columns from Articulo(Nombre de la tabla)
@@ -1752,6 +1752,14 @@ SELECT *
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_SCHEMA = 'transtec_transtec'
   AND TABLE_NAME = 'factura'
+
+
+###### 08112022 ######->>>OBTENER EL NOMBRE DE LAS COLUMNAS DE UNA TABLA CON UN CAMPO EN ESPECIFICO <- <- <- <-
+SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.Columns WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'nombre_tabla' AND COLUMN_NAME LIKE '% %'
+SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.Columns WHERE TABLE_NAME = 'nombre_tabla' AND COLUMN_NAME LIKE '% %'
+
+
+
 
 
 ******************************************************************
