@@ -1801,3 +1801,20 @@ IF(count(DISTINCT factura.id_factura)>1,sum(factura.subtotal),factura.subtotal) 
 ******************************************************************
 ###############   PERMITE MOSTRAR TODOS LOS CAMPOS SIN LIMITACIONES CON EL GROUP CONTACT    ###############
 SET SESSION group_concat_max_len = 1000000;
+
+
+
+
+###############   PESO DE UNA TABLA ESPECIFICA    ###############
+SELECT
+  TABLE_NAME AS `Tabla`,
+  ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024) AS `Tamaño (MB)`
+FROM
+  information_schema.TABLES
+WHERE
+    TABLE_SCHEMA = "transtec_transtec"
+  AND
+    TABLE_NAME = "carga"
+ORDER BY
+  (DATA_LENGTH + INDEX_LENGTH)
+DESC;
