@@ -1818,3 +1818,11 @@ WHERE
 ORDER BY
   (DATA_LENGTH + INDEX_LENGTH)
 DESC;
+
+
+
+
+******************************************************************
+###############   COPIAR CON UN SELECT    ###############
+
+INSERT INTO 'tabla_de_insercion tipo_ingreso' (nombre_tipo,naturaleza,id_empresa,fijo_variable,STATUS,tipo_Gasto 'campos que se copiaran') SELECT nombre_tipo,naturaleza,'207',fijo_variable,STATUS,tipo_Gasto FROM 'tabla_donde_seleccionara tipo_ingreso' WHERE id_empresa = 140 AND STATUS =1;
