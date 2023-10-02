@@ -1,0 +1,5 @@
+########################     Mostrar la Información de l a tabla     ########################
+
+
+show columns from autores;
+DESC autores;
