@@ -6,12 +6,6 @@ DESC autores;
 
 
 
-
-
-
-
-
-
 ########################     Mostrar Info de forma Nomral y de cartas     ########################
 
 SELECT * FROM libros;
