@@ -24,3 +24,8 @@ SELECT RAND();
 SELECT ROUND();
 SELECT TRUNCATE( 1.54326789,3); /*Da como resultado 1.543*/
 SELECT POW( 2 , 16); /*Sirve para petencias*/
+
+
+########################     FUNCIONES PARA FECHAS     ########################
+SET @now= NOW();
+select SECOND(@now),MINUTE(@now),HOUR(@now),MONTH(@now),YEAR(@now);
