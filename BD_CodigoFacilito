@@ -17,3 +17,10 @@ DESC autores;
 SELECT * FROM libros;
 
 SELECT * FROM libros\G;
+
+
+########################     FUNCIONES PARA NUMEROS     ########################
+SELECT RAND();
+SELECT ROUND();
+SELECT TRUNCATE( 1.54326789,3); /*Da como resultado 1.543*/
+SELECT POW( 2 , 16); /*Sirve para petencias*/
