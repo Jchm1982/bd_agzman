@@ -3,3 +3,17 @@
 
 show columns from autores;
 DESC autores;
+
+
+
+
+
+
+
+
+
+########################     Mostrar Info de forma Nomral y de cartas     ########################
+
+SELECT * FROM libros;
+
+SELECT * FROM libros\G;
