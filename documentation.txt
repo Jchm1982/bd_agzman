@@ -1830,5 +1830,6 @@ INSERT INTO 'tabla_de_insercion tipo_ingreso' (nombre_tipo,naturaleza,id_empresa
 
 
 ******************************************************************
+
 ###############   SABER EL PUESRTO DE MI BD    ###############
 SHOW VARIABLES WHERE Variable_name = 'port';
