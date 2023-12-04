@@ -1833,3 +1833,11 @@ INSERT INTO 'tabla_de_insercion tipo_ingreso' (nombre_tipo,naturaleza,id_empresa
 
 ###############   SABER EL PUESRTO DE MI BD    ###############
 SHOW VARIABLES WHERE Variable_name = 'port';
+
+
+
+
+******************************************************************
+###############   OBTENER EL NOMBRE DEL MES    ###############
+SELECT ELT(MONTH(a.fecha_recarga), "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre") 
+       from tb_extintores a;
