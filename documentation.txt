@@ -1841,3 +1841,11 @@ SHOW VARIABLES WHERE Variable_name = 'port';
 ###############   OBTENER EL NOMBRE DEL MES    ###############
 SELECT ELT(MONTH(a.fecha_recarga), "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre") 
        from tb_extintores a;
+
+******************************************************************
+###############   OBTENER EL APELLIDO Y EL NOMBRE DE UN CAMPO CON STRING JUNTOS    ###############
+EJEMPLPO:
+SELECT Email,SUBSTRING_INDEX(nombre, ' ', 1) AS first_name,
+substring_index(substring_index(nombre," ",-1), " ", 1) AS last_name,
+
+'' AS address_line_1,'' AS address_line_2,'' AS city,'' AS state_province_region,'' AS postal_code,'México' AS country FROM usuario WHERE empresa IN ( SELECT id_empresa FROM empresa WHERE STATUS=1 AND razonsocial !='' AND id_empresa NOT IN (4,36,37,40,41,104,189,42,306,174,198) ) 
