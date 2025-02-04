@@ -1880,3 +1880,27 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+###############   NO LLEVA PROCESO ALMACENADO PARA CAMBIAR COLUMNAS A FILAS    ###############
+
+SET SESSION group_concat_max_len = 100000; -- Aumentar límite si hay muchas columnas
+
+-- Generar la consulta dinámica
+SELECT CONCAT(
+    'SELECT id_configura_vista_app, columna FROM (',
+    GROUP_CONCAT(
+        CONCAT("SELECT id_configura_vista_app, '", COLUMN_NAME, "' AS columna 
+                FROM configura_vista_app 
+                WHERE ", COLUMN_NAME, " = 1")
+        SEPARATOR " UNION ALL "
+    ),
+    ') AS unpvt;'
+) INTO @sql_query
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'configura_vista_app'
+AND COLUMN_NAME NOT IN ('id_configura_vista_app', 'id_empresa', 'submenu'); -- Excluir claves primarias
+
+-- Ejecutar la consulta generada
+PREPARE stmt FROM @sql_query;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
