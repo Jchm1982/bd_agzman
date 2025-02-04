@@ -1849,3 +1849,34 @@ SELECT Email,SUBSTRING_INDEX(nombre, ' ', 1) AS first_name,
 substring_index(substring_index(nombre," ",-1), " ", 1) AS last_name,
 
 '' AS address_line_1,'' AS address_line_2,'' AS city,'' AS state_province_region,'' AS postal_code,'México' AS country FROM usuario WHERE empresa IN ( SELECT id_empresa FROM empresa WHERE STATUS=1 AND razonsocial !='' AND id_empresa NOT IN (4,36,37,40,41,104,189,42,306,174,198) ) 
+
+
+
+******************************************************************
+###############   PROCEDIMIENTO ALMACENADO PARA CAMBIAR COLUMNAS A FILAS    ###############
+
+DELIMITER $$
+
+CREATE PROCEDURE GetConfiguraVista()
+BEGIN
+    DECLARE sql_query TEXT;
+
+    -- Generamos la consulta dinámica para convertir columnas en filas
+    SELECT GROUP_CONCAT(
+        CONCAT("SELECT id_configura_vista_app, '", COLUMN_NAME, "' AS columna 
+                FROM configura_vista_app 
+                WHERE ", COLUMN_NAME, " = 1")
+        SEPARATOR " UNION ALL "
+    ) INTO sql_query
+    FROM INFORMATION_SCHEMA.COLUMNS
+    WHERE TABLE_NAME = 'configura_vista_app'
+    AND COLUMN_NAME NOT IN ('id_configura_vista_app', 'id_empresa', 'submenu'); -- Excluir claves
+
+    -- Ejecutar la consulta generada
+    SET @final_query = sql_query;
+    PREPARE stmt FROM @final_query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END $$
+
+DELIMITER ;
