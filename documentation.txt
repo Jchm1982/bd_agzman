@@ -1904,3 +1904,18 @@ AND COLUMN_NAME NOT IN ('id_configura_vista_app', 'id_empresa', 'submenu'); -- E
 PREPARE stmt FROM @sql_query;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
+
+###############   CON ES QUERY PUEDES SACAR EN TEXTO COMPLETO TODOS LOS COMENTARIOS DE LAS COLUMNAS (no truncados como en tu GUI) ###############
+
+SELECT COLUMN_NAME,
+       COLUMN_TYPE,
+       COLUMN_COMMENT,
+       IS_NULLABLE,
+       COLUMN_KEY,
+       COLUMN_DEFAULT,
+       EXTRA
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'transtec_transtec'
+  AND TABLE_NAME = 'configura_vista_app'
+ORDER BY ORDINAL_POSITION;
+
