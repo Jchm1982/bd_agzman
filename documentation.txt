@@ -1905,7 +1905,7 @@ PREPARE stmt FROM @sql_query;
 EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
-###############   CON ES QUERY PUEDES SACAR EN TEXTO COMPLETO TODOS LOS COMENTARIOS DE LAS COLUMNAS (no truncados como en tu GUI) ###############
+############### CON ES QUERY PUEDES SACAR EN TEXTO COMPLETO TODOS LOS COMENTARIOS DE LAS COLUMNAS (no truncados como en tu GUI) ##############
 
 SELECT COLUMN_NAME,
        COLUMN_TYPE,
@@ -1919,3 +1919,17 @@ WHERE TABLE_SCHEMA = 'transtec_transtec'
   AND TABLE_NAME = 'configura_vista_app'
 ORDER BY ORDINAL_POSITION;
 
+############### QUERY (debes analizar) Funciona para agregar 3 digitos al Azara una nocta ###############
+
+SET @cantidad_digitos = 3;
+SELECT 
+    e.nocta,
+    CONCAT(
+        e.nocta,
+        LPAD(FLOOR(RAND() * POW(10, @cantidad_digitos)), @cantidad_digitos, '0')
+    ) AS nocta_final
+FROM empresa e
+WHERE e.id_empresa IN (id_empresa);
+
+
+###############
