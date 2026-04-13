@@ -1932,4 +1932,14 @@ FROM empresa e
 WHERE e.id_empresa IN (id_empresa);
 
 
-###############
+############### QUERY (debes analizar) Funciona para solicitr el 1er. regsitros de Una consulta con varias empresas ###############
+
+SELECT *
+FROM usuario
+WHERE id IN (
+    SELECT MIN(id)
+    FROM usuario
+    WHERE empresa IN (454,455,456,457,458,459,460,461,462)
+    GROUP BY empresa
+)
+ORDER BY empresa;
