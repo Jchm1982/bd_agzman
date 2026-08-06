@@ -1943,3 +1943,28 @@ WHERE id IN (
     GROUP BY empresa
 )
 ORDER BY empresa;
+
+
+
+############### Paginación por grupo en MySQL 5.7 (Top 5 facturas por cliente mediante variables de usuario y LEFT JOIN) ###############
+SET @num := 0, @cliente := 0;
+
+SELECT * FROM (
+    SELECT 
+        -- f.*, 
+        f.id_cliente,f.folio_int,f.tipo,f.fecha,f.uuid,f.status,
+        c.razonsocial, -- Cambia 'nombre_cliente' por el campo real que quieras traer del cliente
+        IF(@cliente = f.id_cliente, @num := @num + 1, @num := 1) AS Rn,
+        @cliente := f.id_cliente
+    FROM factura f
+    LEFT JOIN cliente c ON f.id_cliente = c.id_cliente
+    WHERE f.id_empresa = 459 
+      AND f.status = 1 
+      AND MONTH(f.fecha) = 07 
+      AND YEAR(f.fecha) = 2026 
+      AND f.id_cliente IN (1226156, 1237808, 1249894, 1250195)
+    ORDER BY f.id_cliente ASC, f.fecha ASC, f.id_factura ASC
+) AS resultado
+WHERE Rn <= 5;
+
+###############  ###############
